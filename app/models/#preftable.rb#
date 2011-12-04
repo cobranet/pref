@@ -1,0 +1,12 @@
+class Preftable
+  
+  def initialize
+    @open_info = Arrray.new
+    @closed_info = Array.new
+  end
+  
+  def fill(game,player)
+   
+  end
+  
+end

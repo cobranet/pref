@@ -1,0 +1,6 @@
+class Card
+  @@VALUES = [ '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+  @@SUITS = ['S',
+  def initialize(card_str)
+  end
+end
