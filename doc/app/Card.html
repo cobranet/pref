@@ -70,6 +70,8 @@
 
   <ul class="link-list">
     
+    <li><a href="#method-c-all_cards">::all_cards</a>
+    
     <li><a href="#method-c-new">::new</a>
     
   </ul>
@@ -192,6 +194,36 @@ cards from 7 up from deck</p>
       <h3 class="section-header">Public Class Methods</h3>
 
     
+      <div id="method-c-all_cards" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">all_cards</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>all cards</p>
+          
+
+          
+          <div class="method-source-code" id="all_cards-source">
+            <pre><span class="ruby-comment"># File app/models/card.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all_cards</span>
+  <span class="ruby-identifier">@@ALLCARDS</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- all_cards-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- all_cards-method -->
+
+    
       <div id="method-c-new" class="method-detail ">
         
         <div class="method-heading">
@@ -208,12 +240,12 @@ cards from 7 up from deck</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/card.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/models/card.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">card_str</span>)
   <span class="ruby-ivar">@suit</span> = <span class="ruby-identifier">@@SUITS</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">card_str</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>))
   <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">@@VALUES</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">card_str</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span>))
-
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@suit</span> <span class="ruby-operator">&amp;&amp;</span>  <span class="ruby-ivar">@value</span>  
+  <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">@@ALLCARDS</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">card_str</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@id</span>  
          <span class="ruby-identifier">raise</span>  <span class="ruby-node">&quot;Invalid card string #{card_str}!&quot;</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-ivar">@id</span> = <span class="ruby-value">8</span>*<span class="ruby-ivar">@suit</span><span class="ruby-operator">+</span><span class="ruby-ivar">@value</span>
