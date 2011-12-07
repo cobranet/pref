@@ -1,0 +1,10 @@
+require 'test_helper'
+
+class CardTest < ActiveSupport::TestCase
+
+   #initilisation test
+   test "Card generation with string argument" do
+     c = Card.new('7C')
+     assert_equal '7C' , c.str
+   end
+end

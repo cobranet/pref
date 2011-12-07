@@ -39,3 +39,4 @@ end
 gem 'execjs'
 gem 'therubyracer'
 gem 'minitest'
+gem 'devise'
