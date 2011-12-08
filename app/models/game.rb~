@@ -1,0 +1,10 @@
+# Class holding game date
+# One hand of preferans
+class Game
+  def initialize
+    #hand for each player
+    @south_hand = Array.new
+    @east_hand = Array.new
+    @west_hand = Array.new
+  end
+end

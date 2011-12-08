@@ -63,7 +63,19 @@
   
 </nav>
 
-    
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Comparable</span>
+  
+  
+  </ul>
+</nav>
+
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
@@ -73,6 +85,14 @@
     <li><a href="#method-c-all_cards">::all_cards</a>
     
     <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-c-shuffle">::shuffle</a>
+    
+    <li><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
+    
+    <li><a href="#method-i-same_suit-3F">#same_suit?</a>
+    
+    <li><a href="#method-i-to_s">#to_s</a>
     
   </ul>
 </nav>
@@ -100,6 +120,14 @@
     <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
   
     <li><a href="./Card.html">Card</a>
+  
+    <li><a href="./Game.html">Game</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./WelcomeController.html">WelcomeController</a>
+  
+    <li><a href="./WelcomeHelper.html">WelcomeHelper</a>
   
   </ul>
 </nav>
@@ -141,7 +169,7 @@ cards from 7 up from deck</p>
 
         <div class="method-description">
         
-        
+        <p>attributes</p>
         
         </div>
       </div>
@@ -154,7 +182,7 @@ cards from 7 up from deck</p>
 
         <div class="method-description">
         
-        
+        <p>attributes</p>
         
         </div>
       </div>
@@ -167,7 +195,7 @@ cards from 7 up from deck</p>
 
         <div class="method-description">
         
-        
+        <p>attributes</p>
         
         </div>
       </div>
@@ -180,7 +208,7 @@ cards from 7 up from deck</p>
 
         <div class="method-description">
         
-        
+        <p>attributes</p>
         
         </div>
       </div>
@@ -210,9 +238,13 @@ cards from 7 up from deck</p>
 
           
           <div class="method-source-code" id="all_cards-source">
-            <pre><span class="ruby-comment"># File app/models/card.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/models/card.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all_cards</span>
-  <span class="ruby-identifier">@@ALLCARDS</span>
+  <span class="ruby-identifier">all</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">@@ALLCARDS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">all</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Card</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">all</span> 
 <span class="ruby-keyword">end</span></pre>
           </div><!-- all_cards-source -->
           
@@ -240,7 +272,7 @@ cards from 7 up from deck</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/card.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/models/card.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">card_str</span>)
   <span class="ruby-ivar">@suit</span> = <span class="ruby-identifier">@@SUITS</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">card_str</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>))
   <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">@@VALUES</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">card_str</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span>))
@@ -248,7 +280,6 @@ cards from 7 up from deck</p>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@id</span>  
          <span class="ruby-identifier">raise</span>  <span class="ruby-node">&quot;Invalid card string #{card_str}!&quot;</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@id</span> = <span class="ruby-value">8</span>*<span class="ruby-ivar">@suit</span><span class="ruby-operator">+</span><span class="ruby-ivar">@value</span>
   <span class="ruby-ivar">@str</span> = <span class="ruby-identifier">card_str</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
@@ -261,7 +292,140 @@ cards from 7 up from deck</p>
       </div><!-- new-method -->
 
     
+      <div id="method-c-shuffle" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">shuffle</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>shuffling TODO improved later to get better randomes</p>
+          
+
+          
+          <div class="method-source-code" id="shuffle-source">
+            <pre><span class="ruby-comment"># File app/models/card.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">shuffle</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-constant">Card</span>.<span class="ruby-identifier">all_cards</span>
+  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">sort</span> { <span class="ruby-identifier">rand</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- shuffle-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- shuffle-method -->
+
+    
     </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-3C-3D-3E" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">&lt;=&gt;</span><span
+            class="method-args">(other)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>comparable, suits are ordered SDCH for visual separation</p>
+          
+
+          
+          <div class="method-source-code" id="3C-3D-3E-source">
+            <pre><span class="ruby-comment"># File app/models/card.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">suit_order</span> = [<span class="ruby-value">0</span>,<span class="ruby-value">1</span>,<span class="ruby-value">3</span>,<span class="ruby-value">2</span>]
+  <span class="ruby-identifier">suit_compare</span> = <span class="ruby-identifier">suit_order</span>.<span class="ruby-identifier">index</span>(<span class="ruby-ivar">@suit</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">suit_order</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">suit</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">suit_compare</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@value</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">suit_compare</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 3C-3D-3E-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 3C-3D-3E-method -->
+
+    
+      <div id="method-i-same_suit-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">same_suit?</span><span
+            class="method-args">(other)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>.… simple if same suit</p>
+          
+
+          
+          <div class="method-source-code" id="same_suit-3F-source">
+            <pre><span class="ruby-comment"># File app/models/card.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">same_suit?</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-ivar">@suit</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">suit</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- same_suit-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- same_suit-3F-method -->
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>to_str</p>
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File app/models/card.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-ivar">@str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_s-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_s-method -->
+
+    
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 
