@@ -5,9 +5,9 @@ class CardTest < ActiveSupport::TestCase
    #initilisation tests
    test "Card string must be same as string argument" do
      cards = Card.all_cards               
-     cards.each do |cstr|
-       c = Card.new(cstr)
-       assert_equal cstr , c.str
+     cards.each do |card|
+       c =  Card.new(card.str)
+       assert_equal card.str, c.str
      end
    end
 
@@ -30,30 +30,47 @@ class CardTest < ActiveSupport::TestCase
   #test same id
   test "Card is equal with same value" do
     cards = Card.all_cards
-    cards.each do |str|
-      c1 = Card.new(str)
-      c2 = Card.new(c1.str) 
-      assert_equal true, c1 == c2
+    cards.each do |card|
+      c2 = Card.new(card.str) 
+      assert_equal true, card == c2
     end 
   end
   
   #copare value 
   # 7S < 8H , TH > 9C
-  test "Compare value ... smaller and bigger " do
+  test "Compare cards " do
     c1 = Card.new('7S')
     c2 = Card.new('8H')
     c3 = Card.new('TH')
-    
-    assert_equal true, c2.biger_then(c1)
-    assert_equal true, c3.biger_then(c2)
-    assert_equal false, c2.biger_then(c3)
-    assert_equal false, c2.biger_then(c2)
-
-    assert_equal false, c2.smaller_then(c1)
-    assert_equal false, c3.smaller_then(c2)
-    assert_equal true,  c2.smaller_then(c3)
-    assert_equal false, c2.smaller_then(c2)
-
+    c4 = Card.new('AS')
+    #same as c1
+    c5 = Card.new('7S')
+ 
+    assert_equal true, c1 == Card.new('7S')
+    assert_equal true, c4 > c5
+    assert_equal false, c2 > c2
+    assert_equal true, c1 >= c5
+    assert_equal true, c5 <= c1 
+    assert_equal true, c5 == c1 
+    assert_equal false, c5 > c4
   end 
-
+   
+  test "Shuffling " do
+    a = Card.shuffle
+    assert_equal 32, a.size
+    
+    #all diferent 
+    a.each do |c| 
+      brojac = 0 
+      a.each do |b|
+         if c == b 
+           brojac = brojac + 1
+         end 
+      end
+      # brojac must be 1
+      assert_equal 1, brojac 
+    end
+     
+  end
+  
 end
