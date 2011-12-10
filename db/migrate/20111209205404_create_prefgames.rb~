@@ -1,0 +1,8 @@
+class CreatePrefgames < ActiveRecord::Migration
+  def change
+    create_table :prefgames do |t|
+
+      t.timestamps
+    end
+  end
+end

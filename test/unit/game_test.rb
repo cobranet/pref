@@ -3,8 +3,7 @@ require 'test_helper'
 class GameTest < ActiveSupport::TestCase
   #initialization test
   test "New game" do
-    cards = Card.shuffle
-    g = Game.new(cards)
+    g = Game.new
 
     #state must be :start 
     assert_equal :start, g.state

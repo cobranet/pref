@@ -1,0 +1,2 @@
+module PrefgamesHelper
+end

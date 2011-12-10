@@ -51,8 +51,8 @@ class Card
   #comparable, suits are ordered SDCH for visual separation
   def <=>(other)
     suit_order = [0,1,3,2]
-    suit_compare = suit_order.index(@suit) == suit_order.index(other.suit)
-    if suit_compare 
+    suit_compare = suit_order.index(@suit) <=> suit_order.index(other.suit)
+    if suit_compare == 0
       return @value <=> other.value
     else
       return suit_compare

@@ -1,0 +1,2 @@
+class PrefgamesController < ApplicationController
+end
