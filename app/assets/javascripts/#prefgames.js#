@@ -9,10 +9,11 @@ var cardT = {
       cardT.canvas_el.height = cardT.canvas_el.width*0.5
     },
     get_table_data: function(){
+        var gnum = $('#gnumber').html
 	$.ajax( 
            { 
                type: 'GET',
-               url: "1/data",
+               url: "/data",
 	       success: function (data){
                    cardT.data = data;
 	       },

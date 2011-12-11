@@ -1,0 +1,24 @@
+class ScreenCard
+  def initialize(img,x,y)
+    @img = img
+    @x = x
+    @y = y
+  end
+end
+
+class Screen < ActiveRecord::Base
+  # Podrazumeva se da je ekran 640  x 320
+  # a da su karte 50 x 80
+  
+  def initialize(game,player)
+    @game = game
+    @player = player
+  end
+  def my_cards
+    mu = Array.new
+    @game.hand(@player).each do |c|
+      mu << ScreenCard.new(c.img,
+    end   
+  end
+  
+end

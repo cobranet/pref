@@ -2,7 +2,7 @@ Pref::Application.routes.draw do
 
 
   resources :prefgames do
-    member do 
+    members do 
       get 'data'
     end
   end
