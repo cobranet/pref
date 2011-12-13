@@ -28,6 +28,7 @@ class WaitingTest < ActiveSupport::TestCase
 
   test "adding three users ... set up game" do
     Waiting.delete_all
+    Prefgame.delete_all
     user1 = User.find_by_id(1)
     user2 = User.find_by_id(2)
     user3 = User.find_by_id(3)
@@ -35,7 +36,18 @@ class WaitingTest < ActiveSupport::TestCase
     Waiting.add(user2.id)
     Waiting.add(user3.id)
     pgame = Waiting.set_up_game
-    assert_equal 1, pgame.game_id
+    assert_not_equal nil, pgame.id
   end
  
+  test "user can'b added only once" do
+    Waiting.delete_all
+    user1 = User.find_by_id(1)
+    user2 = User.find_by_id(2)
+    Waiting.add(user1.id)
+    Waiting.add(user2.id)
+    # user2 again
+    Waiting.add(user2.id)
+    pgame = Waiting.set_up_game
+    assert_equal nil, pgame
+  end 
 end

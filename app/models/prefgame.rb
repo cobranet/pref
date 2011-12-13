@@ -10,7 +10,7 @@ class Prefgame < ActiveRecord::Base
   end  
   
   def game_id
-    1
+    @id  
   end
 
 end
