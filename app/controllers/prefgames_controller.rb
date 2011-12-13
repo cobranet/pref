@@ -3,7 +3,14 @@ class PrefgamesController < ApplicationController
     @prefgame = Prefgame.new
   end
   def new
-    @prefgame = Prefgame.new
+    @waiting = Waiting.new
+    @waiting.save!
+    game = Waiting.set_up_game 
+    if game 
+      render :text => "New Game"
+    else
+      render :text => "Waiting"
+    end
   end 
   def data 
     data = {

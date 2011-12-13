@@ -4,8 +4,18 @@
 # is 3 player waiting then game is start
 class Waiting < ActiveRecord::Base
   
-  
+  # Add user to waiting list 
+  # if is not already there
+  def self.add(user_id)
+    if Waiting.find_by_user_id(user_id) == nil 
+      w = Waiting.new
+      w.user_id = user_id
+      w.save!
+    end
+  end
+
   # call when new user is added
+  # may we can start a game?
   def self.set_up_game
     prefgame = nil
     waitings = Waiting.find(:all)

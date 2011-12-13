@@ -8,9 +8,7 @@ class WaitingTest < ActiveSupport::TestCase
   test "adding user in waiting list" do 
     Waiting.delete_all
     user = User.find_by_id(1)
-    w = Waiting.new
-    w.user_id = user.id
-    w.save!
+    Waiting.add(user.id)
     pgame = Waiting.set_up_game
     assert_equal pgame, nil
   end 
@@ -20,14 +18,9 @@ class WaitingTest < ActiveSupport::TestCase
     user1 = User.find_by_id(1)
     user2 = User.find_by_id(2)
     
-    w1 = Waiting.new
-    w1.user_id = user1.id
-    w1.save!
-
-    w2 = Waiting.new
-    w2.user_id = user2.id
-    w2.save!
-     
+    Waiting.add(user1.id)
+    Waiting.add(user2.id) 
+        
     pgame = Waiting.set_up_game
     
     assert_equal pgame, nil
@@ -38,19 +31,11 @@ class WaitingTest < ActiveSupport::TestCase
     user1 = User.find_by_id(1)
     user2 = User.find_by_id(2)
     user3 = User.find_by_id(3)
-    
-    w1 = Waiting.new
-    w1.user_id = user1.id
-    w1.save!
-
-    w2 = Waiting.new
-    w2.user_id = user2.id
-    w2.save!
-
-    w3 = Waiting.new
-    w3.user_id = user3.id
-    w3.save!
+    Waiting.add(user1.id)
+    Waiting.add(user2.id)
+    Waiting.add(user3.id)
     pgame = Waiting.set_up_game
     assert_equal 1, pgame.game_id
   end
+ 
 end
