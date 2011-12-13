@@ -2,7 +2,10 @@ class PrefgamesController < ApplicationController
   def show
     @prefgame = Prefgame.new
   end
-   
+  def new
+    @prefgame = Prefgame.new
+    redirect_to :action => "show"
+  end 
   def data 
     data = {
       :id =>  params[:id],

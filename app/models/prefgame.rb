@@ -1,5 +1,5 @@
 class Prefgame < ActiveRecord::Base
-  def initialize
+  def initialize(players)
     @game = Game.new
   end
   

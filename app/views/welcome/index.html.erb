@@ -1,1 +1,13 @@
-<h1>Preferans on RAILS</h1>
+<% content_for :top do %>
+  <%= content_tag(:h3,"Preferans on Rails") %> 
+<% end %>
+<div id="user_nav">
+        <% if user_signed_in? %>
+          Signed in as <%= current_user.email %>. Not you?
+          <%= link_to "Sign out", destroy_user_session_path %>
+        <% else %>
+          <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+        <% end %>
+<div id="main_nav">
+  <%= link_to("Start",new_prefgame_path) %>
+</div>

@@ -2,6 +2,9 @@ class PrefgamesController < ApplicationController
   def show
     @prefgame = Prefgame.new
   end
+  def new
+    @prefgame = Prefgame.new
+  end 
   def data 
     data = {
       :id =>  params[:id],

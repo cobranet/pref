@@ -1,0 +1,15 @@
+require 'test_helper'
+
+class WaitingTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+  
+  test "adding user in waiting list" do 
+    user = User.find(1)
+    waitings = Waiting.new(user.id)
+    waitings.save!
+    pgame = Waitings.set_up_game
+    # assert_equal pgame, nil
+  end 
+end
