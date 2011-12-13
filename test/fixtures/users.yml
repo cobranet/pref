@@ -5,4 +5,9 @@ cobranet:
 anchy:
   id: 2
   email: pano.petrovic@gmail.com
-  encrypted_password: "panopano" 
+  encrypted_password: "panopano"
+maka:
+  id: 3
+  email: maka.petrovic@gmail.com
+  encrypted_password: "makamaka"
+ 

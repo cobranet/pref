@@ -15,7 +15,7 @@ class Waiting < ActiveRecord::Base
       counter = counter + 1
       for_game << w.user_id
         if counter == 3 
-          prefgame = Prefgame.new(for_game)
+          prefgame = Prefgame.create(for_game)
           for_game.each do |user_id|
             w = Waiting.find_by_user_id(user_id)
             w.destroy   

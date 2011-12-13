@@ -52,5 +52,6 @@ class WaitingTest < ActiveSupport::TestCase
     w3.save!
     pgame = Waiting.set_up_game
     assert_equal 1, pgame.game_id
+    assert_equal 
   end
 end
