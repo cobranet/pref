@@ -1,9 +1,14 @@
-Thu, 08 Dec 2011 08:54:20 -0800
-doc/README_FOR_APP	Sun, 04 Dec 2011 07:04:15 -0800
-app/models/card.rb	Thu, 08 Dec 2011 08:01:21 -0800
-app/models/game.rb	Thu, 08 Dec 2011 08:53:45 -0800
-app/models/user.rb	Wed, 07 Dec 2011 23:25:33 -0800
-app/controllers/welcome_controller.rb	Thu, 08 Dec 2011 08:37:53 -0800
-app/controllers/application_controller.rb	Sun, 04 Dec 2011 07:04:15 -0800
-app/helpers/application_helper.rb	Sun, 04 Dec 2011 07:04:15 -0800
-app/helpers/welcome_helper.rb	Thu, 08 Dec 2011 08:37:38 -0800
+Tue, 13 Dec 2011 22:29:24 +0100
+doc/README_FOR_APP	Sun, 04 Dec 2011 16:04:15 +0100
+app/models/card.rb	Thu, 08 Dec 2011 18:49:08 +0100
+app/models/waiting.rb	Tue, 13 Dec 2011 22:23:53 +0100
+app/models/screen.rb	Sat, 10 Dec 2011 23:24:47 +0100
+app/models/game.rb	Fri, 09 Dec 2011 21:48:53 +0100
+app/models/prefgame.rb	Tue, 13 Dec 2011 21:52:18 +0100
+app/models/user.rb	Thu, 08 Dec 2011 08:25:33 +0100
+app/controllers/welcome_controller.rb	Thu, 08 Dec 2011 17:37:53 +0100
+app/controllers/prefgames_controller.rb	Tue, 13 Dec 2011 22:29:07 +0100
+app/controllers/application_controller.rb	Sun, 04 Dec 2011 16:04:15 +0100
+app/helpers/prefgames_helper.rb	Fri, 09 Dec 2011 21:54:04 +0100
+app/helpers/application_helper.rb	Sun, 04 Dec 2011 16:04:15 +0100
+app/helpers/welcome_helper.rb	Thu, 08 Dec 2011 17:37:38 +0100

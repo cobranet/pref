@@ -72,6 +72,20 @@
     
     <li><a href="#method-c-new">::new</a>
     
+    <li><a href="#method-i-display_game">#display_game</a>
+    
+    <li><a href="#method-i-hand">#hand</a>
+    
+    <li><a href="#method-i-hole">#hole</a>
+    
+    <li><a href="#method-i-played">#played</a>
+    
+    <li><a href="#method-i-player_message">#player_message</a>
+    
+    <li><a href="#method-i-players">#players</a>
+    
+    <li><a href="#method-i-taken">#taken</a>
+    
   </ul>
 </nav>
 
@@ -101,7 +115,19 @@
   
     <li><a href="./Game.html">Game</a>
   
+    <li><a href="./Prefgame.html">Prefgame</a>
+  
+    <li><a href="./PrefgamesController.html">PrefgamesController</a>
+  
+    <li><a href="./PrefgamesHelper.html">PrefgamesHelper</a>
+  
+    <li><a href="./Screen.html">Screen</a>
+  
+    <li><a href="./ScreenCard.html">ScreenCard</a>
+  
     <li><a href="./User.html">User</a>
+  
+    <li><a href="./Waiting.html">Waiting</a>
   
     <li><a href="./WelcomeController.html">WelcomeController</a>
   
@@ -133,6 +159,39 @@
     
 
     
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-on_move" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">on_move</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>accessor</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-state" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">state</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>accessor</p>
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
 
     <!-- Methods -->
     
@@ -151,13 +210,15 @@
 
         <div class="method-description">
           
-          
+          <p>initialze whith <a href="Card.html#method-c-shuffle">Card.shuffle</a> or
+Hand</p>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-identifier">cards</span> = <span class="ruby-constant">Card</span>.<span class="ruby-identifier">shuffle</span>
   <span class="ruby-comment">#Game states</span>
   <span class="ruby-identifier">@@STATES</span> = [<span class="ruby-value">:start</span>,
               <span class="ruby-value">:bidding</span>, 
@@ -165,23 +226,29 @@
               <span class="ruby-value">:comming</span>,
               <span class="ruby-value">:in_play</span>,
               <span class="ruby-value">:score</span> ]
+  <span class="ruby-comment">#dealer allways south</span>
+  <span class="ruby-comment">#players</span>
+  <span class="ruby-identifier">@@PLAYERS</span> = [<span class="ruby-value">:south</span>,<span class="ruby-value">:west</span>,<span class="ruby-value">:east</span>]
   <span class="ruby-comment">#while start waiting to east to start</span>
   <span class="ruby-ivar">@state</span> = <span class="ruby-value">:start</span>
   <span class="ruby-comment">#hand for each player</span>
-  <span class="ruby-comment">#dealer allways south</span>
-  <span class="ruby-ivar">@south_hand</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@east_hand</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@west_hand</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@hands</span> = {} 
+  <span class="ruby-ivar">@hands</span>[<span class="ruby-value">:south</span>] = <span class="ruby-identifier">cards</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span>,<span class="ruby-value">10</span>).<span class="ruby-identifier">sort!</span>
+  <span class="ruby-ivar">@hands</span>[<span class="ruby-value">:east</span>] = <span class="ruby-identifier">cards</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">10</span>,<span class="ruby-value">10</span>).<span class="ruby-identifier">sort!</span>
+  <span class="ruby-ivar">@hands</span>[<span class="ruby-value">:west</span>] = <span class="ruby-identifier">cards</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">20</span>,<span class="ruby-value">10</span>).<span class="ruby-identifier">sort!</span>
   
   <span class="ruby-comment">#cards played on table</span>
-  <span class="ruby-ivar">@south</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@east</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@west</span> = <span class="ruby-keyword">nil</span>
-  
-  <span class="ruby-comment">#taken for each player</span>
-  <span class="ruby-ivar">@s_taken</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@w_taken</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@e_taken</span> = <span class="ruby-value">0</span>  
+  <span class="ruby-ivar">@played</span> = {}
+  <span class="ruby-comment"># number of tricks taken by each player</span>
+  <span class="ruby-ivar">@taken</span> = {}
+  <span class="ruby-comment">#sets taken and played</span>
+  <span class="ruby-identifier">@@PLAYERS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@played</span>[<span class="ruby-identifier">player</span>] = <span class="ruby-keyword">nil</span>
+    <span class="ruby-ivar">@taken</span>[<span class="ruby-identifier">player</span>] = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>      
+  <span class="ruby-comment"># hole cards    </span>
+  <span class="ruby-ivar">@hole_cards</span> = <span class="ruby-identifier">cards</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">30</span>,<span class="ruby-value">2</span>) 
+  <span class="ruby-ivar">@on_move</span> = <span class="ruby-value">:east</span> 
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -194,6 +261,239 @@
 
     
     </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-display_game" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">display_game</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>display hand  helper to debug</p>
+          
+
+          
+          <div class="method-source-code" id="display_game-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">display_game</span> 
+  <span class="ruby-identifier">@@PLAYERS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">player</span>
+    <span class="ruby-identifier">print</span> <span class="ruby-string">&quot;\t&quot;</span>
+    <span class="ruby-identifier">hand</span>(<span class="ruby-identifier">player</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">print</span> <span class="ruby-identifier">card</span>
+      <span class="ruby-identifier">print</span> <span class="ruby-string">' '</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">puts</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@hole_cards</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">card</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">print</span> <span class="ruby-identifier">card</span> 
+    <span class="ruby-identifier">print</span> <span class="ruby-string">' '</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- display_game-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- display_game-method -->
+
+    
+      <div id="method-i-hand" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hand</span><span
+            class="method-args">(player)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>hand for player</p>
+          
+
+          
+          <div class="method-source-code" id="hand-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hand</span>(<span class="ruby-identifier">player</span>)
+  <span class="ruby-ivar">@hands</span>[<span class="ruby-identifier">player</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hand-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hand-method -->
+
+    
+      <div id="method-i-hole" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hole</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>hole cards</p>
+          
+
+          
+          <div class="method-source-code" id="hole-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hole</span>
+  <span class="ruby-ivar">@hole_cards</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hole-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hole-method -->
+
+    
+      <div id="method-i-played" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">played</span><span
+            class="method-args">(player)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>played ( card on table face up )</p>
+          
+
+          
+          <div class="method-source-code" id="played-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">played</span>(<span class="ruby-identifier">player</span>) 
+  <span class="ruby-ivar">@played</span>[<span class="ruby-identifier">player</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- played-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- played-method -->
+
+    
+      <div id="method-i-player_message" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">player_message</span><span
+            class="method-args">(player)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>message for player explaing state</p>
+          
+
+          
+          <div class="method-source-code" id="player_message-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">player_message</span>(<span class="ruby-identifier">player</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-ivar">@state</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:start</span> <span class="ruby-keyword">then</span>  
+      <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;Starting the hand&quot;</span>
+    <span class="ruby-keyword">else</span> 
+      <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;TO STATE : #{@state}&quot;</span> 
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- player_message-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- player_message-method -->
+
+    
+      <div id="method-i-players" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">players</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>players ring</p>
+          
+
+          
+          <div class="method-source-code" id="players-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">players</span>
+  <span class="ruby-identifier">@@PLAYERS</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- players-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- players-method -->
+
+    
+      <div id="method-i-taken" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taken</span><span
+            class="method-args">(player)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>taken ( how much tricks player have )</p>
+          
+
+          
+          <div class="method-source-code" id="taken-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taken</span>(<span class="ruby-identifier">player</span>)
+  <span class="ruby-ivar">@taken</span>[<span class="ruby-identifier">player</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- taken-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- taken-method -->
+
+    
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

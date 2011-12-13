@@ -123,7 +123,19 @@
   
     <li><a href="./Game.html">Game</a>
   
+    <li><a href="./Prefgame.html">Prefgame</a>
+  
+    <li><a href="./PrefgamesController.html">PrefgamesController</a>
+  
+    <li><a href="./PrefgamesHelper.html">PrefgamesHelper</a>
+  
+    <li><a href="./Screen.html">Screen</a>
+  
+    <li><a href="./ScreenCard.html">ScreenCard</a>
+  
     <li><a href="./User.html">User</a>
+  
+    <li><a href="./Waiting.html">Waiting</a>
   
     <li><a href="./WelcomeController.html">WelcomeController</a>
   
@@ -348,8 +360,8 @@ cards from 7 up from deck</p>
             <pre><span class="ruby-comment"># File app/models/card.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">suit_order</span> = [<span class="ruby-value">0</span>,<span class="ruby-value">1</span>,<span class="ruby-value">3</span>,<span class="ruby-value">2</span>]
-  <span class="ruby-identifier">suit_compare</span> = <span class="ruby-identifier">suit_order</span>.<span class="ruby-identifier">index</span>(<span class="ruby-ivar">@suit</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">suit_order</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">suit</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">suit_compare</span> 
+  <span class="ruby-identifier">suit_compare</span> = <span class="ruby-identifier">suit_order</span>.<span class="ruby-identifier">index</span>(<span class="ruby-ivar">@suit</span>) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">suit_order</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">suit</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">suit_compare</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
     <span class="ruby-keyword">return</span> <span class="ruby-ivar">@value</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">value</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">suit_compare</span>

@@ -12,6 +12,7 @@ class PrefgamesController < ApplicationController
       render :text => "Waiting"
     end
   end 
+  #AJAX call this every X seconds ....
   def data 
     data = {
       :id =>  params[:id],
