@@ -1,10 +1,12 @@
 class PrefgamesController < ApplicationController
+
+   before_filter :authenticate_user!
+
   def show
     @prefgame = Prefgame.new
   end
   def new
-    @waiting = Waiting.new
-    @waiting.save!
+    Waiting.add(current_user.id)
     game = Waiting.set_up_game 
     if game 
       render :text => "New Game"

@@ -22,5 +22,16 @@ class GameTest < ActiveSupport::TestCase
 
     
   end
+
+  test "Test to_game_string" do
+    g = Game.new
+    assert_not_equal nil, g.to_game_string
+    assert_equal 11, g.to_game_string.split(';').size
+  end 
  
+  test "From game string" do
+    g = Game.new
+    s = g.to_game_string
+    puts Game.from_game_string(s)
+  end
 end

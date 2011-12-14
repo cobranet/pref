@@ -170,7 +170,7 @@
 
           
           <div class="method-source-code" id="data-source">
-            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> 
   <span class="ruby-identifier">data</span> = {
     <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>],
@@ -203,10 +203,9 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@waiting</span> = <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@waiting</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
   <span class="ruby-identifier">game</span> = <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">set_up_game</span> 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">game</span> 
     <span class="ruby-identifier">render</span> <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;New Game&quot;</span>
@@ -240,7 +239,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-ivar">@prefgame</span> = <span class="ruby-constant">Prefgame</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
