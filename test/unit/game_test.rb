@@ -32,6 +32,7 @@ class GameTest < ActiveSupport::TestCase
   test "From game string" do
     g = Game.new
     s = g.to_game_string
-    puts Game.from_game_string(s)
+    g1 = Game.from_game_string(s)
+    assert_equal s, g1.to_game_string
   end
 end

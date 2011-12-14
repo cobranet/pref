@@ -1,0 +1,4 @@
+# Class for holding one deal of preferans hand
+# with inital setup many games can be played
+class Hand < ActiveRecord::Base
+end

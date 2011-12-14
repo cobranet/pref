@@ -137,13 +137,44 @@ class Game
       @state = game_arr[0]
       @on_move = game_arr[1]
       @hands = {}
-      @@PLAYERS.each_with_index do |p,i| 
-      player_str = game_arr[2+i]
+      @@PLAYERS.each_with_index do |p,i|
+        @hands[p] = Array.new 
+        player_str = game_arr[2+i]
         (0..player_str.size/2-1).each do |s|
-          @hands[p] = Card.new(player_str.slice(s*2,2))
+          @hands[p] << Card.new( player_str.slice(s*2,2))
         end
       end
+      #there is allways two hole cards
+      @hole_cards =  Array.new
+      hole_str = game_arr[5]
+      (0..1).each do |i|
+        @hole_cards << Card.new(hole_str.slice(i*2,2)) 
+      end
+
+      #there is allways three table cards 
+      #if XX then table cards is null
+      @played = {}
+      played_str = game_arr[6]
+      @@PLAYERS.each_with_index do |p,i|
+         card_str =  played_str.slice(i*2,2)
+         if card_str == "XX" 
+           @played[p] = nil
+         else   
+           @played[p] = Card.new()
+         end
+      end
+
+      #taken 
+      @taken = {}
+      @@PLAYERS.each_with_index do |p,i|
+        @taken[p] = Array.new
+        taken_str = game_arr[7+i]
+        (0..taken_str.size/2-1).each do |k|
+          @taken[p] << Card.new(taken_str.slice(i*2,2))
+        end
+      end
+    self
     end
-   end
- 
+  end
+  
 end
