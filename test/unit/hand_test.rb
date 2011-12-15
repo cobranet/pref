@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class HandTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
   # test creation of hand
   test "create hand" do 
     hand = Hand.new
@@ -13,4 +10,14 @@ class HandTest < ActiveSupport::TestCase
     #must be 32*2 long
     assert_equal 32*2, hand.cards.size
   end
+
+  # testing creation of Array from cards string  
+  test "get cards" do 
+    hand = Hand.new
+    hand.create
+    a = hand.get_cards
+    assert_equal Card,a[0].class
+    assert_equal 32, a.size
+  end 
+
 end

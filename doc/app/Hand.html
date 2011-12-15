@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
-<title>Class: Waiting</title>
+<title>Class: Hand</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>app/models/waiting.rb
+    <li>app/models/hand.rb
   </ul>
 </nav>
 
@@ -70,9 +70,9 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-add">::add</a>
+    <li><a href="#method-i-create">#create</a>
     
-    <li><a href="#method-c-set_up_game">::set_up_game</a>
+    <li><a href="#method-i-get_cards">#get_cards</a>
     
   </ul>
 </nav>
@@ -130,13 +130,12 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class Waiting</h1>
+  <h1 class="class">class Hand</h1>
 
   <div id="description" class="description">
     
-<p>Class waiting to set up the game  when player press the start game  he been
-added in <a href="Waiting.html">Waiting</a> list and if there is 3 player
-waiting then game is start</p>
+<p>Class for holding one deal of preferans hand with inital setup many games
+can be played</p>
 
   </div><!-- description -->
 
@@ -151,51 +150,37 @@ waiting then game is start</p>
     
 
     
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-cards" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">cards</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-c-add" class="method-detail ">
+      <div id="method-i-create" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">add</span><span
-            class="method-args">(user_id)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Add user to waiting list  if is not already there</p>
-          
-
-          
-          <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File app/models/waiting.rb, line 9</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">user_id</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">find_by_user_id</span>(<span class="ruby-identifier">user_id</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> 
-    <span class="ruby-identifier">w</span> = <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">w</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">user_id</span>
-    <span class="ruby-identifier">w</span>.<span class="ruby-identifier">save!</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- add-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- add-method -->
-
-    
-      <div id="method-c-set_up_game" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">set_up_game</span><span
+          <span class="method-name">create</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -203,41 +188,64 @@ waiting then game is start</p>
 
         <div class="method-description">
           
-          <p>call when new user is added may we can start a game?</p>
+          <p>create new hand</p>
           
 
           
-          <div class="method-source-code" id="set_up_game-source">
-            <pre><span class="ruby-comment"># File app/models/waiting.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_up_game</span>
-  <span class="ruby-identifier">prefgame</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">waitings</span> = <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>)
-  <span class="ruby-identifier">counter</span> = <span class="ruby-value">0</span>
-  <span class="ruby-identifier">for_game</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">waitings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> 
-    <span class="ruby-identifier">counter</span> = <span class="ruby-identifier">counter</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">for_game</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">user_id</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">counter</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span> 
-        <span class="ruby-identifier">prefgame</span> = <span class="ruby-constant">Prefgame</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">for_game</span>)
-        <span class="ruby-identifier">for_game</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user_id</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">w</span> = <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">find_by_user_id</span>(<span class="ruby-identifier">user_id</span>)
-          <span class="ruby-identifier">w</span>.<span class="ruby-identifier">destroy</span>   
-      <span class="ruby-keyword">end</span>     
-    <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/models/hand.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-identifier">car</span> = <span class="ruby-constant">Card</span>.<span class="ruby-identifier">shuffle</span>
+  <span class="ruby-ivar">@cards</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">car</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@cards</span> = <span class="ruby-node">&quot;#{@cards}#{c.to_s}&quot;</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">prefgame</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- set_up_game-source -->
+          </div><!-- create-source -->
           
         </div>
 
         
 
         
-      </div><!-- set_up_game-method -->
+      </div><!-- create-method -->
 
     
-    </section><!-- public-class-method-details -->
+      <div id="method-i-get_cards" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_cards</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returning a array of <a href="Card.html">Card</a></p>
+          
+
+          
+          <div class="method-source-code" id="get_cards-source">
+            <pre><span class="ruby-comment"># File app/models/hand.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_cards</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">31</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Card</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-identifier">i</span>*<span class="ruby-value">2</span>,<span class="ruby-value">2</span>))
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">a</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_cards-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_cards-method -->
+
+    
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

@@ -3,7 +3,10 @@ require 'test_helper'
 class GameTest < ActiveSupport::TestCase
   #initialization test
   test "New game" do
-    g = Game.new
+    h = Hand.new
+    h.create
+     
+    g = Game.new(h.get_cards)
 
     #state must be :start 
     assert_equal :start, g.state
@@ -22,15 +25,20 @@ class GameTest < ActiveSupport::TestCase
 
     
   end
-
+  # create string to put in database with all game states
   test "Test to_game_string" do
-    g = Game.new
+    h = Hand.new
+    h.create
+    g = Game.new(h.get_cards)
     assert_not_equal nil, g.to_game_string
     assert_equal 11, g.to_game_string.split(';').size
   end 
- 
+  
+  # testing loading game from string
   test "From game string" do
-    g = Game.new
+    h = Hand.new
+    h.create
+    g = Game.new(h.get_cards)
     s = g.to_game_string
     g1 = Game.from_game_string(s)
     assert_equal s, g1.to_game_string

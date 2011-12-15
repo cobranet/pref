@@ -1,9 +1,10 @@
-Wed, 14 Dec 2011 00:21:25 +0100
+Thu, 15 Dec 2011 06:58:23 +0100
 doc/README_FOR_APP	Wed, 14 Dec 2011 00:21:10 +0100
+app/models/hand.rb	Thu, 15 Dec 2011 06:53:44 +0100
 app/models/card.rb	Thu, 08 Dec 2011 18:49:08 +0100
 app/models/waiting.rb	Wed, 14 Dec 2011 00:02:35 +0100
 app/models/screen.rb	Sat, 10 Dec 2011 23:24:47 +0100
-app/models/game.rb	Fri, 09 Dec 2011 21:48:53 +0100
+app/models/game.rb	Thu, 15 Dec 2011 06:46:13 +0100
 app/models/prefgame.rb	Tue, 13 Dec 2011 23:49:40 +0100
 app/models/user.rb	Thu, 08 Dec 2011 08:25:33 +0100
 app/controllers/welcome_controller.rb	Thu, 08 Dec 2011 17:37:53 +0100

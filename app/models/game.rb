@@ -4,8 +4,7 @@ class Game
   #accessor 
   attr_reader :state, :on_move
   #initialze whith Card.shuffle or Hand
-  def initialize
-    cards = Card.shuffle
+  def initialize(cards)
     #Game states
     @@STATES = [:start,
                 :bidding, 
