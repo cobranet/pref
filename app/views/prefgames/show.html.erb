@@ -1,8 +1,12 @@
+<%= javascript_include_tag "prefgames" %>
+
 <div>
   <%= link_to_function "Get table data", "cardT.get_table_data()" %>
 </div>
 
 <%= content_tag(:div ,"", :id => "urlid", :game_id => @prefgame.game_id ) %>
 <%= content_tag(:h3, " Game ID: #{@prefgame.id}") %>
+<div id="jerror"></div>
 <canvas id="main"></canvas>
+
 

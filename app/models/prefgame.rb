@@ -41,5 +41,10 @@ class Prefgame < ActiveRecord::Base
     players << west
     screen = Screen.new(fgame,seat,players)
   end
-
+   
+  def data 
+    sc = screen(:south)
+    sc.data
+  end
+   
 end

@@ -28,11 +28,7 @@ class PrefgamesController < ApplicationController
   end   
   #AJAX call this every X seconds ....
   def data 
-    data = {
-      :id =>  params[:id],
-      :cards => [0,1,2,3,4,5,5] }
-    render :text => data.to_json
+    @prefgame = Prefgame.find_by_id(params[:id])
+    render :text => @prefgame.data.to_json
   end
-  
-  
 end

@@ -9,17 +9,11 @@ var cardT = {
       cardT.canvas_el.height = cardT.canvas_el.width*0.5
     },
     get_table_data: function(){
-	$.ajax( 
-           { 
-               type: 'GET',
-               url: "1/data",
-	       success: function (data){
-                   cardT.data = data;
-	       },
-	       error: function(data){
-                   alert(data);
-               }
-	   });
+      var jqXHR= $.get("9/data")
+	    .success( function(){ alert("succes"); })
+            .error( function(data){ 
+                      $("#jerror").html(data.responseText); 
+             });
     }	
 };
 /* on load */ 
