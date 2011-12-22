@@ -49,5 +49,7 @@ class WaitingTest < ActiveSupport::TestCase
     Waiting.add(user2.id)
     pgame = Waiting.set_up_game
     assert_equal nil, pgame
-  end 
+  end
+
+  
 end

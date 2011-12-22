@@ -1,0 +1,2 @@
+class LivetestsController < ApplicationController
+end

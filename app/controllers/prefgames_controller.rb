@@ -5,11 +5,16 @@ class PrefgamesController < ApplicationController
   def show
     @prefgame = Prefgame.new
   end
+  #try to start new preferans game
   def new
+    
+    #for testing we first add two user 
+    Waiting.add_two 
     Waiting.add(current_user.id)
-    game = Waiting.set_up_game 
-    if game 
-      render :text => "New Game"
+    pgame = Waiting.set_up_game
+    pgame.save! 
+    if pgame 
+      render :action => "show"
     else
       render :text => "Waiting"
     end
@@ -21,4 +26,6 @@ class PrefgamesController < ApplicationController
       :cards => [0,1,2,3,4,5,5] }
     render :text => data.to_json
   end
+  
+  
 end

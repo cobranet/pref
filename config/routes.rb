@@ -1,12 +1,13 @@
 Pref::Application.routes.draw do
 
+ 
+  resources :livetests
 
   resources :prefgames do
     member do 
       get 'data'
     end
   end
-
   devise_for :users
 
   # The priority is based upon order of creation:

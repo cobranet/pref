@@ -1,0 +1,2 @@
+class Livetest < ActiveRecord::Base
+end

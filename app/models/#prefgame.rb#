@@ -7,10 +7,10 @@ class Prefgame < ActiveRecord::Base
     p.west = players[2]
     p.save
     p
-  end  
+  end
   
   def game_id
-    
+    @id  
   end
 
 end
