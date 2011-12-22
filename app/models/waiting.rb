@@ -34,5 +34,4 @@ class Waiting < ActiveRecord::Base
     end
     prefgame
   end
-  
 end

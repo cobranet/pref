@@ -72,6 +72,8 @@
     
     <li><a href="#method-c-create">::create</a>
     
+    <li><a href="#method-i-add_two">#add_two</a>
+    
     <li><a href="#method-i-game_id">#game_id</a>
     
   </ul>
@@ -104,6 +106,12 @@
     <li><a href="./Game.html">Game</a>
   
     <li><a href="./Hand.html">Hand</a>
+  
+    <li><a href="./Livetest.html">Livetest</a>
+  
+    <li><a href="./LivetestsController.html">LivetestsController</a>
+  
+    <li><a href="./LivetestsHelper.html">LivetestsHelper</a>
   
     <li><a href="./Prefgame.html">Prefgame</a>
   
@@ -215,6 +223,43 @@
       <h3 class="section-header">Public Instance Methods</h3>
 
     
+      <div id="method-i-add_two" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_two</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>For testing purpose  start new game with virtual players</p>
+          
+
+          
+          <div class="method-source-code" id="add_two-source">
+            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_two</span>
+  <span class="ruby-identifier">maka</span>  = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value">:email</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'marija.petrovic@gmail.com'</span>,
+                    <span class="ruby-value">:password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'565675gfg'</span> )
+  <span class="ruby-identifier">maka</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-identifier">ana</span>  = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value">:email</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'ana.petrovic@gmail.com'</span>,
+                   <span class="ruby-value">:password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'fdsfdfs'</span> )
+  <span class="ruby-identifier">ana</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">maka</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">ana</span>.<span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- add_two-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- add_two-method -->
+
+    
       <div id="method-i-game_id" class="method-detail ">
         
         <div class="method-heading">
@@ -231,7 +276,7 @@
 
           
           <div class="method-source-code" id="game_id-source">
-            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">game_id</span>
   <span class="ruby-ivar">@id</span>  
 <span class="ruby-keyword">end</span></pre>

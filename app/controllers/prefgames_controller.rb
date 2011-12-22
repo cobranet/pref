@@ -7,13 +7,10 @@ class PrefgamesController < ApplicationController
   end
   #try to start new preferans game
   def new
-    
-    #for testing we first add two user 
-    Waiting.add_two 
     Waiting.add(current_user.id)
-    pgame = Waiting.set_up_game
-    pgame.save! 
-    if pgame 
+    @prefgame = Waiting.set_up_game
+    @prefgame.save! 
+    if @prefgame 
       render :action => "show"
     else
       render :text => "Waiting"

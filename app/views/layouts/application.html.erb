@@ -9,6 +9,7 @@
 <body> 
   <div id="top"> 
     <%= yield :top %>
+    <%= link_to "LiveTest" , livetests_path, :method => :post  %>
   </div>
   <div id="notice">
     <p class="notice"><%= notice %></p>
