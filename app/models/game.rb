@@ -175,5 +175,4 @@ class Game
     self
     end
   end
-  
 end

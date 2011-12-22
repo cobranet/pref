@@ -9,6 +9,7 @@ class LivetestTest < ActiveSupport::TestCase
     user1 = User.find_by_id(1)
     Waiting.add(user1.id)
     pgame = Waiting.set_up_game
+    pgame.save!
     assert_not_equal nil, pgame.id 
    end
 
