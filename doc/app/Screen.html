@@ -74,7 +74,11 @@
     
     <li><a href="#method-i-data">#data</a>
     
+    <li><a href="#method-i-left">#left</a>
+    
     <li><a href="#method-i-my_cards">#my_cards</a>
+    
+    <li><a href="#method-i-right">#right</a>
     
   </ul>
 </nav>
@@ -142,6 +146,10 @@
 
   <div id="description" class="description">
     
+<p>this is how particular player see the game he is ALLWAYS “south” but in
+real game he can’be east or west there is same methods as in game but with
+changed sits</p>
+
   </div><!-- description -->
 
   
@@ -166,7 +174,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(game,player)</span>
+            class="method-args">(game,player,users_ids)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -178,11 +186,11 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/screen.rb, line 14</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">game</span>,<span class="ruby-identifier">player</span>)
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">game</span>,<span class="ruby-identifier">player</span>,<span class="ruby-identifier">users_ids</span>)
   <span class="ruby-ivar">@game</span> = <span class="ruby-identifier">game</span>
-  <span class="ruby-ivar">@player</span> = <span class="ruby-identifier">player</span>
-  
+  <span class="ruby-ivar">@seat</span> = <span class="ruby-identifier">player</span> <span class="ruby-comment"># :east, :south , :west</span>
+  <span class="ruby-ivar">@user_ids</span> = <span class="ruby-identifier">users_ids</span>
   <span class="ruby-ivar">@table_width</span> = <span class="ruby-value">640</span>
   <span class="ruby-ivar">@table_height</span> = <span class="ruby-value">320</span>
 <span class="ruby-keyword">end</span></pre>
@@ -218,13 +226,13 @@
 
           
           <div class="method-source-code" id="data-source">
-            <pre><span class="ruby-comment"># File app/models/screen.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span>
   <span class="ruby-identifier">data</span> = {
      <span class="ruby-value">:mycards</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">my_cards</span>,
-     <span class="ruby-value">:myname</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Bratislav Petrovic'</span>  
+     <span class="ruby-value">:myname</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-string">'braca'</span>
   }
-  <span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_json</span>
+  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_json</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- data-source -->
           
@@ -234,6 +242,42 @@
 
         
       </div><!-- data-method -->
+
+    
+      <div id="method-i-left" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">left</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="left-source">
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">left</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seat</span> <span class="ruby-operator">==</span>  <span class="ruby-value">:south</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:east</span> 
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@seat</span> <span class="ruby-operator">==</span> <span class="ruby-value">:east</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:west</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:south</span> 
+  <span class="ruby-keyword">end</span>              
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- left-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- left-method -->
 
     
       <div id="method-i-my_cards" class="method-detail ">
@@ -252,10 +296,10 @@
 
           
           <div class="method-source-code" id="my_cards-source">
-            <pre><span class="ruby-comment"># File app/models/screen.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">my_cards</span>
   <span class="ruby-identifier">mc</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@game</span>.<span class="ruby-identifier">hand</span>(<span class="ruby-ivar">@player</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span>,<span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+  <span class="ruby-ivar">@game</span>.<span class="ruby-identifier">hand</span>(<span class="ruby-ivar">@seat</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span>,<span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">mc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ScreenCard</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{c.to_s}.png&quot;</span>,<span class="ruby-value">100</span><span class="ruby-operator">+</span><span class="ruby-value">20</span>*<span class="ruby-identifier">i</span>,<span class="ruby-value">100</span>)
   <span class="ruby-keyword">end</span> 
   <span class="ruby-identifier">mc</span>  
@@ -268,6 +312,42 @@
 
         
       </div><!-- my_cards-method -->
+
+    
+      <div id="method-i-right" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">right</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="right-source">
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">right</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seat</span> <span class="ruby-operator">==</span>  <span class="ruby-value">:south</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:west</span> 
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@seat</span> <span class="ruby-operator">==</span> <span class="ruby-value">:east</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:south</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:east</span> 
+  <span class="ruby-keyword">end</span>              
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- right-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- right-method -->
 
     
     </section><!-- public-instance-method-details -->

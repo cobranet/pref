@@ -1,20 +1,25 @@
 # Class holding game date
 # One hand of preferans
 class Game
-  #accessor 
-  attr_reader :state, :on_move
-  #initialze whith Card.shuffle or Hand
-  def initialize(cards)
-    #Game states
-    @@STATES = [:start,
+
+  #dealer allways south
+  #players
+  @@PLAYERS = [:south,:west,:east]
+
+  #Game states  
+  @@STATES = [:start,
                 :bidding, 
                 :calling_trump ,
                 :comming,
                 :in_play,
                 :score ]
-    #dealer allways south
-    #players
-    @@PLAYERS = [:south,:west,:east]
+
+  #accessor 
+  attr_reader :state, :on_move
+  #initialze whith Card.shuffle or Hand
+  def initialize(cards)
+
+
     #while start waiting to east to start
     @state = :start
     #hand for each player

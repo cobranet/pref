@@ -1,17 +1,17 @@
-Thu, 22 Dec 2011 10:04:08 +0100
+Fri, 23 Dec 2011 00:24:01 +0100
 doc/README_FOR_APP	Wed, 14 Dec 2011 00:21:10 +0100
 app/models/hand.rb	Thu, 15 Dec 2011 07:00:33 +0100
 app/models/card.rb	Thu, 08 Dec 2011 18:49:08 +0100
-app/models/waiting.rb	Thu, 22 Dec 2011 09:52:59 +0100
-app/models/livetest.rb	Thu, 22 Dec 2011 10:01:42 +0100
-app/models/screen.rb	Sat, 10 Dec 2011 23:24:47 +0100
-app/models/game.rb	Thu, 15 Dec 2011 06:46:13 +0100
-app/models/prefgame.rb	Thu, 22 Dec 2011 09:02:15 +0100
+app/models/waiting.rb	Thu, 22 Dec 2011 10:04:43 +0100
+app/models/livetest.rb	Thu, 22 Dec 2011 10:29:04 +0100
+app/models/screen.rb	Thu, 22 Dec 2011 16:29:33 +0100
+app/models/game.rb	Thu, 22 Dec 2011 16:27:26 +0100
+app/models/prefgame.rb	Thu, 22 Dec 2011 15:11:56 +0100
 app/models/user.rb	Thu, 08 Dec 2011 08:25:33 +0100
 app/controllers/welcome_controller.rb	Thu, 08 Dec 2011 17:37:53 +0100
-app/controllers/prefgames_controller.rb	Thu, 22 Dec 2011 09:16:18 +0100
+app/controllers/prefgames_controller.rb	Thu, 22 Dec 2011 15:21:49 +0100
 app/controllers/application_controller.rb	Sun, 04 Dec 2011 16:04:15 +0100
-app/controllers/livetests_controller.rb	Thu, 22 Dec 2011 09:37:40 +0100
+app/controllers/livetests_controller.rb	Thu, 22 Dec 2011 10:28:08 +0100
 app/helpers/prefgames_helper.rb	Fri, 09 Dec 2011 21:54:04 +0100
 app/helpers/livetests_helper.rb	Thu, 22 Dec 2011 09:37:40 +0100
 app/helpers/application_helper.rb	Sun, 04 Dec 2011 16:04:15 +0100

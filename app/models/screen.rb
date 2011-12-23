@@ -56,6 +56,6 @@ class Screen
        :mycards => my_cards,
        :myname =>  'braca'
     }
-    date.to_json
+    data.to_json
   end
 end

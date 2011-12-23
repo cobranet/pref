@@ -72,9 +72,13 @@
     
     <li><a href="#method-c-create">::create</a>
     
-    <li><a href="#method-i-add_two">#add_two</a>
+    <li><a href="#method-i-data">#data</a>
+    
+    <li><a href="#method-i-fgame">#fgame</a>
     
     <li><a href="#method-i-game_id">#game_id</a>
+    
+    <li><a href="#method-i-screen">#screen</a>
     
   </ul>
 </nav>
@@ -142,6 +146,19 @@
 
   <div id="description" class="description">
     
+<pre class="ruby"><span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;prefgames&quot;</span>, :<span class="ruby-identifier">force</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>   <span class="ruby-string">&quot;game&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>   <span class="ruby-string">&quot;status&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span>  <span class="ruby-string">&quot;east&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span>  <span class="ruby-string">&quot;south&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span>  <span class="ruby-string">&quot;west&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">datetime</span> <span class="ruby-string">&quot;created_at&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">datetime</span> <span class="ruby-string">&quot;updated_at&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Prefgames</p>
+
   </div><!-- description -->
 
   
@@ -154,26 +171,6 @@
 
     
 
-    
-    <!-- Attributes -->
-    <section id="attribute-method-details" class="method-section section">
-      <h3 class="section-header">Attributes</h3>
-
-      
-      <div id="attribute-i-players" class="method-detail">
-        <div class="method-heading attribute-method-heading">
-          <span class="method-name">players</span><span
-            class="attribute-access-type">[R]</span>
-        </div>
-
-        <div class="method-description">
-        
-        
-        
-        </div>
-      </div>
-      
-    </section><!-- attribute-method-details -->
     
 
     <!-- Methods -->
@@ -198,13 +195,19 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 3</span>
+            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">players</span>)
   <span class="ruby-identifier">p</span> = <span class="ruby-constant">Prefgame</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-comment">#create hand</span>
+  <span class="ruby-identifier">h</span> = <span class="ruby-constant">Hand</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">h</span>.<span class="ruby-identifier">create</span>
+  <span class="ruby-comment">#create game</span>
+  <span class="ruby-ivar">@full_game</span> = <span class="ruby-constant">Game</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">h</span>.<span class="ruby-identifier">get_cards</span>)
+  <span class="ruby-identifier">p</span>.<span class="ruby-identifier">game</span> = <span class="ruby-ivar">@full_game</span>.<span class="ruby-identifier">to_game_string</span>
   <span class="ruby-identifier">p</span>.<span class="ruby-identifier">east</span> = <span class="ruby-identifier">players</span>[<span class="ruby-value">0</span>]
   <span class="ruby-identifier">p</span>.<span class="ruby-identifier">south</span> = <span class="ruby-identifier">players</span>[<span class="ruby-value">1</span>]
   <span class="ruby-identifier">p</span>.<span class="ruby-identifier">west</span> = <span class="ruby-identifier">players</span>[<span class="ruby-value">2</span>]
-  <span class="ruby-identifier">p</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-identifier">p</span>.<span class="ruby-identifier">save!</span>
   <span class="ruby-identifier">p</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- create-source -->
@@ -223,10 +226,10 @@
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-add_two" class="method-detail ">
+      <div id="method-i-data" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">add_two</span><span
+          <span class="method-name">data</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -234,30 +237,57 @@
 
         <div class="method-description">
           
-          <p>For testing purpose  start new game with virtual players</p>
+          
           
 
           
-          <div class="method-source-code" id="add_two-source">
-            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_two</span>
-  <span class="ruby-identifier">maka</span>  = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value">:email</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'marija.petrovic@gmail.com'</span>,
-                    <span class="ruby-value">:password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'565675gfg'</span> )
-  <span class="ruby-identifier">maka</span>.<span class="ruby-identifier">save!</span>
-  <span class="ruby-identifier">ana</span>  = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value">:email</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'ana.petrovic@gmail.com'</span>,
-                   <span class="ruby-value">:password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'fdsfdfs'</span> )
-  <span class="ruby-identifier">ana</span>.<span class="ruby-identifier">save!</span>
-  <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">maka</span>.<span class="ruby-identifier">id</span>)
-  <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">ana</span>.<span class="ruby-identifier">id</span>)
+          <div class="method-source-code" id="data-source">
+            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> 
+  <span class="ruby-identifier">sc</span> = <span class="ruby-identifier">screen</span>(<span class="ruby-value">:south</span>)
+  <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">data</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- add_two-source -->
+          </div><!-- data-source -->
           
         </div>
 
         
 
         
-      </div><!-- add_two-method -->
+      </div><!-- data-method -->
+
+    
+      <div id="method-i-fgame" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fgame</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="fgame-source">
+            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fgame</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@full_game</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-ivar">@full_game</span> = <span class="ruby-constant">Game</span>.<span class="ruby-identifier">from_game_string</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">game</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@full_game</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- fgame-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- fgame-method -->
 
     
       <div id="method-i-game_id" class="method-detail ">
@@ -276,7 +306,7 @@
 
           
           <div class="method-source-code" id="game_id-source">
-            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">game_id</span>
   <span class="ruby-ivar">@id</span>  
 <span class="ruby-keyword">end</span></pre>
@@ -288,6 +318,40 @@
 
         
       </div><!-- game_id-method -->
+
+    
+      <div id="method-i-screen" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">screen</span><span
+            class="method-args">(seat)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="screen-source">
+            <pre><span class="ruby-comment"># File app/models/prefgame.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">screen</span>(<span class="ruby-identifier">seat</span>)
+  <span class="ruby-identifier">players</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">players</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">east</span>
+  <span class="ruby-identifier">players</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">south</span>
+  <span class="ruby-identifier">players</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">west</span>
+  <span class="ruby-identifier">screen</span> = <span class="ruby-constant">Screen</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fgame</span>,<span class="ruby-identifier">seat</span>,<span class="ruby-identifier">players</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- screen-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- screen-method -->
 
     
     </section><!-- public-instance-method-details -->

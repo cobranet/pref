@@ -142,6 +142,19 @@
 
   <div id="description" class="description">
     
+<pre class="ruby"><span class="ruby-identifier">create_table</span> <span class="ruby-string">&quot;prefgames&quot;</span>, :<span class="ruby-identifier">force</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>   <span class="ruby-string">&quot;game&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>   <span class="ruby-string">&quot;status&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span>  <span class="ruby-string">&quot;east&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span>  <span class="ruby-string">&quot;south&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span>  <span class="ruby-string">&quot;west&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">datetime</span> <span class="ruby-string">&quot;created_at&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">datetime</span> <span class="ruby-string">&quot;updated_at&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a href="Prefgame.html">Prefgame</a> is database part of game ...</p>
+
   </div><!-- description -->
 
   
@@ -178,12 +191,10 @@
 
           
           <div class="method-source-code" id="data-source">
-            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span> 
-  <span class="ruby-identifier">data</span> = {
-    <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>],
-    <span class="ruby-value">:cards</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">0</span>,<span class="ruby-value">1</span>,<span class="ruby-value">2</span>,<span class="ruby-value">3</span>,<span class="ruby-value">4</span>,<span class="ruby-value">5</span>,<span class="ruby-value">5</span>] }
-  <span class="ruby-identifier">render</span> <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_json</span>
+  <span class="ruby-ivar">@prefgame</span> = <span class="ruby-constant">Prefgame</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@prefgame</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_json</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- data-source -->
           
@@ -211,16 +222,13 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 9</span>
+            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  
-  <span class="ruby-comment">#for testing we first add two user </span>
-  <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">add_two</span> 
   <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
-  <span class="ruby-identifier">pgame</span> = <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">set_up_game</span>
-  <span class="ruby-identifier">pgame</span>.<span class="ruby-identifier">save!</span> 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">pgame</span> 
-    <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;show&quot;</span>
+  <span class="ruby-ivar">@prefgame</span> = <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">set_up_game</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@prefgame</span> 
+    <span class="ruby-ivar">@prefgame</span>.<span class="ruby-identifier">save!</span> 
+    <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;show&quot;</span> , <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@prefgame</span>.<span class="ruby-identifier">id</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">render</span> <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Waiting&quot;</span>
   <span class="ruby-keyword">end</span>
@@ -251,9 +259,9 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/prefgames_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-ivar">@prefgame</span> = <span class="ruby-constant">Prefgame</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@prefgame</span> = <span class="ruby-constant">Prefgame</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 <span class="ruby-keyword">end</span></pre>
           </div><!-- show-source -->
           

@@ -74,6 +74,8 @@
     
     <li><a href="#method-c-create_two_users">::create_two_users</a>
     
+    <li><a href="#method-c-delete_virtual_users">::delete_virtual_users</a>
+    
   </ul>
 </nav>
 
@@ -178,7 +180,7 @@
 
           
           <div class="method-source-code" id="add_two-source">
-            <pre><span class="ruby-comment"># File app/models/livetest.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/models/livetest.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add_two</span>
   <span class="ruby-identifier">maka</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_email</span>(<span class="ruby-string">'marija.petrovic@gmail.com'</span>)
   <span class="ruby-identifier">ana</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_email</span>(<span class="ruby-string">'ana.petrovic@gmail.com'</span>)
@@ -211,7 +213,7 @@
 
           
           <div class="method-source-code" id="create_two_users-source">
-            <pre><span class="ruby-comment"># File app/models/livetest.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/models/livetest.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_two_users</span>
   <span class="ruby-identifier">maka</span>  = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>( <span class="ruby-value">:email</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'marija.petrovic@gmail.com'</span>,
                     <span class="ruby-value">:password</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'565675gfg'</span> )
@@ -230,6 +232,39 @@
 
         
       </div><!-- create_two_users-method -->
+
+    
+      <div id="method-c-delete_virtual_users" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_virtual_users</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>deleting all users</p>
+          
+
+          
+          <div class="method-source-code" id="delete_virtual_users-source">
+            <pre><span class="ruby-comment"># File app/models/livetest.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_virtual_users</span>    
+  <span class="ruby-identifier">maka</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_email</span>(<span class="ruby-string">'marija.petrovic@gmail.com'</span>)
+  <span class="ruby-identifier">ana</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_email</span>(<span class="ruby-string">'ana.petrovic@gmail.com'</span>)
+  <span class="ruby-identifier">maka</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">ana</span>.<span class="ruby-identifier">destroy</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_virtual_users-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_virtual_users-method -->
 
     
     </section><!-- public-class-method-details -->
