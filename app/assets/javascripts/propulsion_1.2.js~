@@ -1328,14 +1328,17 @@ var PP = {
 
 	Sprite: function(url,subimg,xorig,yorig) {
 		if (!(this instanceof PP.Sprite)) {
- 			return new PP.Sprite(url,subimg,xorig,yorig);
+			return new PP.Sprite(url,subimg,xorig,yorig);
 		}
+		
 		this.imgObj = new Image();
 		this.url = url;
 		this.subimg = subimg;
 		this.xorig = xorig;
 		this.yorig = yorig;
+		
 		PP.load.spritesList.push(this);
+		
 		return this;
 	},
 	
