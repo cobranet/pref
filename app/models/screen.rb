@@ -1,7 +1,7 @@
 class ScreenCard
-  attr_reader :img, :x, :y
-  def initialize(img,x,y)
-    @img = img
+  attr_reader :id, :x, :y
+  def initialize(id,x,y)
+    @id = id
     @x = x
     @y = y
   end
@@ -46,7 +46,7 @@ class Screen
   def my_cards
     mc = Array.new
     @game.hand(@seat).each_with_index do |c,i|
-      mc << ScreenCard.new("#{c.to_s}.png",100+20*i,100)
+      mc << ScreenCard.new(c.id,100+20*i,100)
     end 
     mc  
   end

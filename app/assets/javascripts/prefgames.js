@@ -30,13 +30,13 @@ function newCard() {
             card.image.onload = function () { card.is_ready = true; };
             card.image.src = img_file;
         },
-        drawImage: function(){
+        drawImage: function(table){
+       //     card.width = table.cardw;
+        //    card.height = table.cardh;  
             card.ctx.clearRect(0,0,card.width,card.height); // clear previous frame
 	    if ( card.is_ready) {
                 var srcX = 0;
 		var srcY = 0;
-                var srcW = 90;
-                var srcH = 70;
                 card.ctx.drawImage(card.image,0,0,72,96,0,0,card.width,card.height); // drawimage  
             }
         },
@@ -47,18 +47,25 @@ function newCard() {
 
 /* main table object */
 var cardT = {
+    allcards: [ '7S', '8S', '9S', 'TS', 'JS', 'QS', 'KS', 'AS',
+               '7D', '8D', '9D', 'TD', 'JD', 'QD', 'KD', 'AD',
+               '7H', '8H', '9H', 'TH', 'JH', 'QH', 'KH', 'AH',
+        	'7C', '8C', '9C', 'TC', 'JC', 'QC', 'KC', 'AC'],
     cardw : 72,  // initial card width
     cardh : 96, // initial card height
     canvas_el : 0, // canvas
     ctx : 0, // context,
-    card : 0, // card object /
+    cards : [], // Array of card object /
     setup: function(){
 	cardT.canvas_el = $('#main').get(0);
         cardT.ctx = cardT.canvas_el.getContext('2d');
         /* new canvas for card */
-        var new_canvas = document.createElement('canvas');
-        cardT.card = newCard();
-        cardT.card.initCard(new_canvas,100,100,cardT.cardw,cardT.cardh,'/assets/9D.png');
+
+        for (var i=0;i<cardT.allcards.length;i++) { 
+           var new_canvas = document.createElement('canvas');
+           cardT.cards[i] = newCard();
+           cardT.cards[i].initCard(new_canvas,100,100,cardT.cardw,cardT.cardh,'/assets/'+ cardT.allcards[i] + '.png');
+	}
         /* background */
         
         cardT.background = new Image();
@@ -66,29 +73,34 @@ var cardT = {
 	    cardT.background.ready = true;
             cardT.timer = setInterval(cardT.drawFrame,40);
 	};
-        cardT.background.src = '/assets/9D.png';
+        cardT.background.src = '/assets/back.png';
     },
     drawFrame: function(){
         cardT.ctx.clearRect(0,0,cardT.canvas_el.width,cardT.canvas_el.height);
-        cardT.ctx.drawImage(cardT.background,0,0);
-        if(cardT.card) { // if card exists
-            cardT.card.drawImage();
-            cardT.ctx.drawImage(cardT.card.canvas,cardT.card.x,cardT.card.y); 
+        cardT.ctx.drawImage(cardT.background,0,0,640,400);
+        if(cardT.cards[1]) { // if card exists
+            cardT.cards[1].drawImage();
+            cardT.ctx.drawImage(cardT.cards[1].canvas,cardT.cards[1].x,cardT.cards[1].y); 
         } 
     },
     resize_canvas: function(){
       var inner =  window.innerWidth;
       cardT.canvas_el.width = inner*0.8
       cardT.canvas_el.height = cardT.canvas_el.width*0.5
-	cardT.cardw = 72 * 640/inner;
-        cardT.cardh = 96 * 640/inner;
+   
     },
     get_table_data: function(){
-      var jqXHR= $.get("9/data")
-	    .success( function(){ alert("succes"); })
+      var jqXHR= $.getJSON("11/data")
+	    .success(cardT.set_player_cards )
             .error( function(data){ 
                       $("#jerror").html(data.responseText); 
              });
+    },
+    set_player_cards: function(data){
+        var g = $.parseJSON(data);
+        for (var i= 0;i<g.mycards.length;i++){
+           alert (g.mycards[i].id);
+        }
     }	
 };
 
