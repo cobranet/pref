@@ -6,6 +6,7 @@ class Hand < ActiveRecord::Base
   # create new hand
   def create
     car = Card.shuffle
+    car = Card.shuffle
     @cards = ""
     car.each do |c|
       @cards = "#{@cards}#{c.to_s}"

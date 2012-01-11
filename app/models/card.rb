@@ -31,7 +31,15 @@ class Card
   #shuffling TODO improved later to get better randomes
   def self.shuffle
     a = Card.all_cards
-    a.sort { rand }
+    # shuffle via replace ... meny times
+    for i in 1..100 
+      r1 = rand(32)
+      r2 = rand(32)
+      tmp = a[r1]
+      a[r1] = a[r2]
+      a[r2] = tmp     
+    end    
+    a
   end
     
   # all cards

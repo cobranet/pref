@@ -4,10 +4,9 @@
   <%= image_tag("rails.png") %> 
   <%= link_to_function "Get table data", "cardT.get_table_data()" %>
 </div>
-
-<%= content_tag(:div ,"", :id => "urlid", :game_id => @prefgame.game_id ) %>
-<%= content_tag(:h3, " Game ID: #{@prefgame.id}") %>
+<%= content_tag(:div , @prefgame.id, :id => "urlid" ) %>
 <div id="jerror"></div>
+<div id="log"></div>
 <canvas id="main"></canvas>
 
 

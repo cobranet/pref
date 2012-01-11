@@ -1,9 +1,10 @@
 class ScreenCard
-  attr_reader :id, :x, :y
-  def initialize(id,x,y)
+  attr_reader :id, :x, :y, :str
+  def initialize(id,x,y,str)
     @id = id
     @x = x
     @y = y
+    @str = str
   end
 end
 # this is how particular player see the game
@@ -46,7 +47,7 @@ class Screen
   def my_cards
     mc = Array.new
     @game.hand(@seat).each_with_index do |c,i|
-      mc << ScreenCard.new(c.id,100+20*i,100)
+      mc << ScreenCard.new(c.id,100+20*i,130,c.to_s)
     end 
     mc  
   end
