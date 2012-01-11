@@ -4,7 +4,7 @@ class Game
 
   #dealer allways south
   #players
-  @@PLAYERS = [:south,:west,:east]
+  @@PLAYERS = [:west,:south,:east]
 
   #Game states  
   @@STATES = [:start,
@@ -16,6 +16,7 @@ class Game
 
   #accessor 
   attr_reader :state, :on_move
+
   #initialze whith Card.shuffle or Hand
   def initialize(cards)
 
@@ -48,11 +49,65 @@ class Game
   def hand(player)
     @hands[player]
   end
+  # is card playable ?
+  def is_playable?(card)
+    return false unless @hands[@on_move].include?(card)
+    if @played[left(@on_move)] == nil
+      return true
+    end  
+  end 
+  #left player of seat
+  def left(seat)
+    if seat ==  :south 
+      return :west 
+    elsif seat == :east
+      return :south
+    else
+      return :east 
+    end              
+  end
  
+  #right player of seat
+  def right(seat)
+    if seat ==  :south 
+      return :east 
+    elsif seat == :east
+      return :west
+    else
+      return :south 
+    end              
+  end
+  # first player to play in trick  
+  def lead_player 
+    l1 = left(@on_move)
+    if @played[l1] == nil 
+      return  nil #
+    end 
+  end
+  #playing the card
+  def play(card)
+    player = player?(card)
+    if player == nil 
+      raise RuntimeError,'Invalid card to play'
+    end  
+    @played[player] = card
+    @hands[player].remove(card)
+    nil
+  end
+  # who has the card ?
+  def player?(card)
+    @@PLAYERS.each do |player|
+      if hand(player).include?(card)
+        return player
+      end 
+    end
+    return nil
+  end
   #players ring
   def players
     @@PLAYERS
   end
+
 
   #played ( card on table face up )
   def played(player) 
@@ -130,6 +185,7 @@ class Game
     s = "#{s}END;" 
     s
   end  
+
   # Game is held in database as string 
   # delimitet by ; 
   # state;on_move;southcards;eastcards;westcards;holecards;tablecards;southtaken;ea  #  sttaken;westtaken
@@ -139,7 +195,7 @@ class Game
     allocate.instance_eval do 
       game_arr = s.split(';')
       @state = game_arr[0]
-      @on_move = game_arr[1]
+      @on_move = game_arr[1].to_sym
       @hands = {}
       @@PLAYERS.each_with_index do |p,i|
         @hands[p] = Array.new 

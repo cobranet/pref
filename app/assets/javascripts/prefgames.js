@@ -29,10 +29,16 @@ function newCard() {
             card.image.onload = function () { card.is_ready = true; };
             card.image.src = img_file;
         },
-        drawImage: function(table){
+        drawImage: function(w,h){
             
             if ( card.visible == false ) { return; };  
+            card.canvas.setAttribute('width',w);
+            card.canvas.setAttribute('height',h);
+
             card.ctx.clearRect(0,0,card.width,card.height); // clear previous frame
+            card.width = w
+            card.height = h
+  
 	    if ( card.is_ready) {
                 var srcX = 0;
 		var srcY = 0;
@@ -81,7 +87,7 @@ var cardT = {
     drawFrame1: function(){
          
         cardT.ctx.clearRect(0,0,cardT.canvas_el.width,cardT.canvas_el.height);
-        cardT.ctx.drawImage(cardT.background,0,0,640,400);
+        cardT.ctx.drawImage(cardT.background,0,0,640,400,0,0,cardT.canvas_el.width,cardT.canvas_el.height);
         for (var i = 0 ; i < 32;i++) { 
             var c = cardT.cards[i];
             if(c) { // if card exists
@@ -92,23 +98,26 @@ var cardT = {
     },
 // this is primitive game loop
     drawFrame: function(){
+        
         cardT.ctx.clearRect(0,0,cardT.canvas_el.width,cardT.canvas_el.height);
-        cardT.ctx.drawImage(cardT.background,0,0,640,400);
+        cardT.ctx.drawImage(cardT.background,0,0,640,400,0,0,cardT.canvas_el.width,cardT.canvas_el.height);
         if ( cardT.game == 0 ) { 
             return; 
         }
         for (var i = 0 ; i < cardT.game.mycards.length;i++) { 
             var c = cardT.cards[cardT.game.mycards[i].id];
             if(c) { // if card exists
-               c.drawImage();
+	       c.drawImage(cardT.cardw,cardT.cardh);
                cardT.ctx.drawImage(c.canvas,c.x,c.y); 
             }
 	} 
     },
     resize_canvas: function(){
-      var inner =  window.innerWidth;
-      cardT.canvas_el.width = inner*0.8
-      cardT.canvas_el.height = cardT.canvas_el.width*0.5
+        var inner =  window.innerWidth;
+        cardT.canvas_el.width = inner*0.8;
+        cardT.cardw = 72 * cardT.canvas_el.width / 640;
+        cardT.cardh = cardT.cardw * 96/72;
+        cardT.canvas_el.height = cardT.canvas_el.width*0.5;
    
     },
     get_table_data: function(){

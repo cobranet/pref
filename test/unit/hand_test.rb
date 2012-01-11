@@ -18,8 +18,6 @@ class HandTest < ActiveSupport::TestCase
     a = hand.get_cards
     assert_equal Card,a[0].class
     assert_equal 32, a.size
-    #first card can't be '7S'
-    assert_not_equal '7S', a[0].to_s 
   end 
 
 end
