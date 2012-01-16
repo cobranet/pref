@@ -181,18 +181,18 @@ changed sits</p>
 
         <div class="method-description">
           
-          <p>Podrazumeva se da je ekran 640  x 320 a da su karte 50 x 80</p>
+          <p>Podrazumeva se da je ekran 640  x 400 a da su karte 50 x 80</p>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/screen.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">game</span>,<span class="ruby-identifier">player</span>,<span class="ruby-identifier">users_ids</span>)
   <span class="ruby-ivar">@game</span> = <span class="ruby-identifier">game</span>
   <span class="ruby-ivar">@seat</span> = <span class="ruby-identifier">player</span> <span class="ruby-comment"># :east, :south , :west</span>
   <span class="ruby-ivar">@user_ids</span> = <span class="ruby-identifier">users_ids</span>
   <span class="ruby-ivar">@table_width</span> = <span class="ruby-value">640</span>
-  <span class="ruby-ivar">@table_height</span> = <span class="ruby-value">320</span>
+  <span class="ruby-ivar">@table_height</span> = <span class="ruby-value">400</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -226,7 +226,7 @@ changed sits</p>
 
           
           <div class="method-source-code" id="data-source">
-            <pre><span class="ruby-comment"># File app/models/screen.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">data</span>
   <span class="ruby-identifier">data</span> = {
      <span class="ruby-value">:mycards</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">my_cards</span>,
@@ -255,20 +255,14 @@ changed sits</p>
 
         <div class="method-description">
           
-          
+          <p>left player of screen player</p>
           
 
           
           <div class="method-source-code" id="left-source">
-            <pre><span class="ruby-comment"># File app/models/screen.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">left</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seat</span> <span class="ruby-operator">==</span>  <span class="ruby-value">:south</span> 
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:east</span> 
-  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@seat</span> <span class="ruby-operator">==</span> <span class="ruby-value">:east</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:west</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:south</span> 
-  <span class="ruby-keyword">end</span>              
+  <span class="ruby-ivar">@game</span>.<span class="ruby-identifier">left</span>(<span class="ruby-ivar">@seat</span>) 
 <span class="ruby-keyword">end</span></pre>
           </div><!-- left-source -->
           
@@ -291,16 +285,16 @@ changed sits</p>
 
         <div class="method-description">
           
-          
+          <p>cards for player screen</p>
           
 
           
           <div class="method-source-code" id="my_cards-source">
-            <pre><span class="ruby-comment"># File app/models/screen.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">my_cards</span>
   <span class="ruby-identifier">mc</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@game</span>.<span class="ruby-identifier">hand</span>(<span class="ruby-ivar">@seat</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span>,<span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">mc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ScreenCard</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{c.to_s}.png&quot;</span>,<span class="ruby-value">100</span><span class="ruby-operator">+</span><span class="ruby-value">20</span>*<span class="ruby-identifier">i</span>,<span class="ruby-value">100</span>)
+    <span class="ruby-identifier">mc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ScreenCard</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">id</span>,<span class="ruby-value">100</span><span class="ruby-operator">+</span><span class="ruby-value">20</span>*<span class="ruby-identifier">i</span>,<span class="ruby-value">130</span>,<span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_s</span>,<span class="ruby-keyword">true</span>)
   <span class="ruby-keyword">end</span> 
   <span class="ruby-identifier">mc</span>  
 <span class="ruby-keyword">end</span></pre>
@@ -325,20 +319,14 @@ changed sits</p>
 
         <div class="method-description">
           
-          
+          <p>right player of screen player</p>
           
 
           
           <div class="method-source-code" id="right-source">
-            <pre><span class="ruby-comment"># File app/models/screen.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/models/screen.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">right</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seat</span> <span class="ruby-operator">==</span>  <span class="ruby-value">:south</span> 
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:west</span> 
-  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@seat</span> <span class="ruby-operator">==</span> <span class="ruby-value">:east</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:south</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:east</span> 
-  <span class="ruby-keyword">end</span>              
+  <span class="ruby-ivar">@game</span>.<span class="ruby-identifier">right</span>(<span class="ruby-ivar">@seat</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- right-source -->
           

@@ -223,7 +223,7 @@ waiting then game is start</p>
   <span class="ruby-identifier">waitings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> 
     <span class="ruby-identifier">counter</span> = <span class="ruby-identifier">counter</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
     <span class="ruby-identifier">for_game</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">user_id</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">counter</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span> 
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">counter</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>            
         <span class="ruby-identifier">prefgame</span> = <span class="ruby-constant">Prefgame</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">for_game</span>)
         <span class="ruby-identifier">for_game</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user_id</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">w</span> = <span class="ruby-constant">Waiting</span>.<span class="ruby-identifier">find_by_user_id</span>(<span class="ruby-identifier">user_id</span>)

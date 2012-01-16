@@ -80,11 +80,23 @@
     
     <li><a href="#method-i-hole">#hole</a>
     
+    <li><a href="#method-i-is_playable-3F">#is_playable?</a>
+    
+    <li><a href="#method-i-lead_player">#lead_player</a>
+    
+    <li><a href="#method-i-left">#left</a>
+    
+    <li><a href="#method-i-play">#play</a>
+    
     <li><a href="#method-i-played">#played</a>
+    
+    <li><a href="#method-i-player-3F">#player?</a>
     
     <li><a href="#method-i-player_message">#player_message</a>
     
     <li><a href="#method-i-players">#players</a>
+    
+    <li><a href="#method-i-right">#right</a>
     
     <li><a href="#method-i-taken">#taken</a>
     
@@ -230,12 +242,12 @@ href="Game.html#attribute-i-on_move">#on_move</a>;southcards;eastcards;westcards
 
           
           <div class="method-source-code" id="from_game_string-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 138</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">from_game_string</span>(<span class="ruby-identifier">s</span>)
   <span class="ruby-identifier">allocate</span>.<span class="ruby-identifier">instance_eval</span> <span class="ruby-keyword">do</span> 
     <span class="ruby-identifier">game_arr</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">';'</span>)
     <span class="ruby-ivar">@state</span> = <span class="ruby-identifier">game_arr</span>[<span class="ruby-value">0</span>]
-    <span class="ruby-ivar">@on_move</span> = <span class="ruby-identifier">game_arr</span>[<span class="ruby-value">1</span>]
+    <span class="ruby-ivar">@on_move</span> = <span class="ruby-identifier">game_arr</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_sym</span>
     <span class="ruby-ivar">@hands</span> = {}
     <span class="ruby-identifier">@@PLAYERS</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span>,<span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
       <span class="ruby-ivar">@hands</span>[<span class="ruby-identifier">p</span>] = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span> 
@@ -303,7 +315,7 @@ href="Hand.html">Hand</a></p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">cards</span>)
 
 
@@ -362,7 +374,7 @@ href="Hand.html">Hand</a></p>
 
           
           <div class="method-source-code" id="display_game-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 137</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">display_game</span> 
   <span class="ruby-identifier">@@PLAYERS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">player</span>
@@ -404,7 +416,7 @@ href="Hand.html">Hand</a></p>
 
           
           <div class="method-source-code" id="hand-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hand</span>(<span class="ruby-identifier">player</span>)
   <span class="ruby-ivar">@hands</span>[<span class="ruby-identifier">player</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -434,7 +446,7 @@ href="Hand.html">Hand</a></p>
 
           
           <div class="method-source-code" id="hole-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 67</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hole</span>
   <span class="ruby-ivar">@hole_cards</span>
 <span class="ruby-keyword">end</span></pre>
@@ -446,6 +458,144 @@ href="Hand.html">Hand</a></p>
 
         
       </div><!-- hole-method -->
+
+    
+      <div id="method-i-is_playable-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_playable?</span><span
+            class="method-args">(card)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>is card playable ?</p>
+          
+
+          
+          <div class="method-source-code" id="is_playable-3F-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_playable?</span>(<span class="ruby-identifier">card</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@hands</span>[<span class="ruby-ivar">@on_move</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">card</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@played</span>[<span class="ruby-identifier">left</span>(<span class="ruby-ivar">@on_move</span>)] <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>  
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_playable-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_playable-3F-method -->
+
+    
+      <div id="method-i-lead_player" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lead_player</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>first player to play in trick</p>
+          
+
+          
+          <div class="method-source-code" id="lead_player-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lead_player</span> 
+  <span class="ruby-identifier">l1</span> = <span class="ruby-identifier">left</span>(<span class="ruby-ivar">@on_move</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@played</span>[<span class="ruby-identifier">l1</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> 
+    <span class="ruby-keyword">return</span>  <span class="ruby-keyword">nil</span> <span class="ruby-comment">#</span>
+  <span class="ruby-keyword">end</span> 
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- lead_player-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- lead_player-method -->
+
+    
+      <div id="method-i-left" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">left</span><span
+            class="method-args">(seat)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>left player of seat</p>
+          
+
+          
+          <div class="method-source-code" id="left-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">left</span>(<span class="ruby-identifier">seat</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seat</span> <span class="ruby-operator">==</span>  <span class="ruby-value">:south</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:west</span> 
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seat</span> <span class="ruby-operator">==</span> <span class="ruby-value">:east</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:south</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:east</span> 
+  <span class="ruby-keyword">end</span>              
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- left-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- left-method -->
+
+    
+      <div id="method-i-play" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">play</span><span
+            class="method-args">(card)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>playing the card</p>
+          
+
+          
+          <div class="method-source-code" id="play-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">play</span>(<span class="ruby-identifier">card</span>)
+  <span class="ruby-identifier">player</span> = <span class="ruby-identifier">player?</span>(<span class="ruby-identifier">card</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">player</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> 
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeError</span>,<span class="ruby-string">'Invalid card to play'</span>
+  <span class="ruby-keyword">end</span>  
+  <span class="ruby-ivar">@played</span>[<span class="ruby-identifier">player</span>] = <span class="ruby-identifier">card</span>
+  <span class="ruby-ivar">@hands</span>[<span class="ruby-identifier">player</span>].<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">card</span>)
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- play-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- play-method -->
 
     
       <div id="method-i-played" class="method-detail ">
@@ -464,7 +614,7 @@ href="Hand.html">Hand</a></p>
 
           
           <div class="method-source-code" id="played-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">played</span>(<span class="ruby-identifier">player</span>) 
   <span class="ruby-ivar">@played</span>[<span class="ruby-identifier">player</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -476,6 +626,41 @@ href="Hand.html">Hand</a></p>
 
         
       </div><!-- played-method -->
+
+    
+      <div id="method-i-player-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">player?</span><span
+            class="method-args">(card)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>who has the card ?</p>
+          
+
+          
+          <div class="method-source-code" id="player-3F-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">player?</span>(<span class="ruby-identifier">card</span>)
+  <span class="ruby-identifier">@@PLAYERS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">player</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">hand</span>(<span class="ruby-identifier">player</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">card</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">player</span>
+    <span class="ruby-keyword">end</span> 
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- player-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- player-3F-method -->
 
     
       <div id="method-i-player_message" class="method-detail ">
@@ -494,7 +679,7 @@ href="Hand.html">Hand</a></p>
 
           
           <div class="method-source-code" id="player_message-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 71</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">player_message</span>(<span class="ruby-identifier">player</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-ivar">@state</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">:start</span> <span class="ruby-keyword">then</span>  
@@ -529,7 +714,7 @@ href="Hand.html">Hand</a></p>
 
           
           <div class="method-source-code" id="players-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">players</span>
   <span class="ruby-identifier">@@PLAYERS</span>
 <span class="ruby-keyword">end</span></pre>
@@ -541,6 +726,42 @@ href="Hand.html">Hand</a></p>
 
         
       </div><!-- players-method -->
+
+    
+      <div id="method-i-right" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">right</span><span
+            class="method-args">(seat)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>right player of seat</p>
+          
+
+          
+          <div class="method-source-code" id="right-source">
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">right</span>(<span class="ruby-identifier">seat</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seat</span> <span class="ruby-operator">==</span>  <span class="ruby-value">:south</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:east</span> 
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seat</span> <span class="ruby-operator">==</span> <span class="ruby-value">:east</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:west</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:south</span> 
+  <span class="ruby-keyword">end</span>              
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- right-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- right-method -->
 
     
       <div id="method-i-taken" class="method-detail ">
@@ -559,7 +780,7 @@ href="Hand.html">Hand</a></p>
 
           
           <div class="method-source-code" id="taken-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 63</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">taken</span>(<span class="ruby-identifier">player</span>)
   <span class="ruby-ivar">@taken</span>[<span class="ruby-identifier">player</span>].<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
@@ -592,7 +813,7 @@ href="Game.html#attribute-i-on_move">#on_move</a>;southcards;eastcards;westcards
 
           
           <div class="method-source-code" id="to_game_string-source">
-            <pre><span class="ruby-comment"># File app/models/game.rb, line 101</span>
+            <pre><span class="ruby-comment"># File app/models/game.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_game_string</span>
   <span class="ruby-identifier">s</span> = <span class="ruby-node">&quot;#{@state};&quot;</span>
   <span class="ruby-identifier">s</span> = <span class="ruby-node">&quot;#{s}#{@on_move};&quot;</span>

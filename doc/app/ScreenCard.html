@@ -156,9 +156,22 @@
       <h3 class="section-header">Attributes</h3>
 
       
-      <div id="attribute-i-img" class="method-detail">
+      <div id="attribute-i-id" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">img</span><span
+          <span class="method-name">id</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-str" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">str</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
@@ -208,7 +221,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(img,x,y)</span>
+            class="method-args">(id,x,y,str,playable)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -221,10 +234,12 @@
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File app/models/screen.rb, line 3</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">img</span>,<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
-  <span class="ruby-ivar">@img</span> = <span class="ruby-identifier">img</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>,<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">str</span>,<span class="ruby-identifier">playable</span>)
+  <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">id</span>
   <span class="ruby-ivar">@x</span> = <span class="ruby-identifier">x</span>
   <span class="ruby-ivar">@y</span> = <span class="ruby-identifier">y</span>
+  <span class="ruby-ivar">@str</span> = <span class="ruby-identifier">str</span>
+  <span class="ruby-ivar">@playable</span> = <span class="ruby-identifier">playable</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           

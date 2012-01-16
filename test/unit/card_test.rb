@@ -13,9 +13,12 @@ class CardTest < ActiveSupport::TestCase
 
   #must raise error if string is invalud 
   test "Card must raise error if string is invalid" do
+    begin
     assert_raise RuntimeError do 
       c = Card.new ('&*')
     end
+      rescue
+    end 
   end 
   
   #test same suit 

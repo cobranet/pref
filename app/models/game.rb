@@ -49,13 +49,32 @@ class Game
   def hand(player)
     @hands[player]
   end
+
+  # if player have suit 
+  def have_suit?(player,suit)
+    h = hand(player)
+    h.each do |c|
+      puts "SUIT #{c.suit} #{suit}"
+     if c.suit == suit 
+       return true
+     end
+    end
+    false
+  end  
+
+
   # is card playable ?
   def is_playable?(card)
+    # if not card in hand of player which turn is
     return false unless @hands[@on_move].include?(card)
-    if @played[left(@on_move)] == nil
+    
+    #if no cards played this turn any card is playable
+    if cards_played_size == 0
       return true
-    end  
-  end 
+    end          
+  end
+
+
   #left player of seat
   def left(seat)
     if seat ==  :south 
@@ -77,23 +96,35 @@ class Game
       return :south 
     end              
   end
-  # first player to play in trick  
+
+
+  # first player who already  play in trick  
   def lead_player 
     l1 = left(@on_move)
     if @played[l1] == nil 
       return  nil #
     end 
   end
+
+  # first card played in trick
+  def lead_card
+    player = lead_player
+    @played[player]
+  end
+  
   #playing the card
   def play(card)
     player = player?(card)
-    if player == nil 
-      raise RuntimeError,'Invalid card to play'
+    if player == nil or player != @on_move 
+      raise RuntimeError, 'Invalid card to play'
     end  
+     
+    @on_move = right(player)
     @played[player] = card
-    @hands[player].remove(card)
+    hand(player).delete(card)
     nil
   end
+  
   # who has the card ?
   def player?(card)
     @@PLAYERS.each do |player|
@@ -103,6 +134,14 @@ class Game
     end
     return nil
   end
+  
+  #played cards in current trick  
+  def cards_played_size 
+    a = @played
+    a.delete_if { |key, value| value == nil }
+    a.length
+  end
+
   #players ring
   def players
     @@PLAYERS
@@ -110,7 +149,7 @@ class Game
 
 
   #played ( card on table face up )
-  def played(player) 
+  def cards_played(player) 
     @played[player]
   end
 

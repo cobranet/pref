@@ -202,6 +202,7 @@ can be played</p>
             <pre><span class="ruby-comment"># File app/models/hand.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">car</span> = <span class="ruby-constant">Card</span>.<span class="ruby-identifier">shuffle</span>
+  <span class="ruby-identifier">car</span> = <span class="ruby-constant">Card</span>.<span class="ruby-identifier">shuffle</span>
   <span class="ruby-ivar">@cards</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">car</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@cards</span> = <span class="ruby-node">&quot;#{@cards}#{c.to_s}&quot;</span>
@@ -233,7 +234,7 @@ can be played</p>
 
           
           <div class="method-source-code" id="get_cards-source">
-            <pre><span class="ruby-comment"># File app/models/hand.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/models/hand.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_cards</span>
   <span class="ruby-identifier">a</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
   (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">31</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
