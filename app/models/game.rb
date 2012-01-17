@@ -54,7 +54,6 @@ class Game
   def have_suit?(player,suit)
     h = hand(player)
     h.each do |c|
-      puts "SUIT #{c.suit} #{suit}"
      if c.suit == suit 
        return true
      end
