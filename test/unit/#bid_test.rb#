@@ -41,7 +41,14 @@ class BidTest < ActiveSupport::TestCase
     assert_equal 'm4', @b.last_bid
 
   end
-   
+  
+  test "check end" do
+    @b.bid("P")
+    @b.bid("P")
+    @b.bid("P")
+    @b.check_end
+    assert_equal true, @b.is_end?
+  end 
  
   
 end

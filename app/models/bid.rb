@@ -32,24 +32,42 @@ class Bid
   def initialize
     @bids = Array.new
     @last_bid = 'N'
+    @end = false
+    @game_bidded = false 
+    @doubled = false
+    @redoubled = false
   end
    
   #someone is bidding
   def bid(bid)
-    if @@BIDS.include?(bid) == false then
-      raise RuntimeError, "Invalid bid #{bid}"
+    if bid_posible?(bid) == false 
+      raise RuntimeError, "Invalid bid #{bid} last bid = #{@last_bid} game bided = #{@game_bidded} "
+    end  
+    # if game bidded
+    if bid.slice(0,1) == 'G'
+      @game_bidded = true
     end
     if bid == 'P' 
       @bids << bid
-      return
-    end
-    if bid == "NB" 
+    elsif  bid == "NB" 
       @bids << bid
       @last_bid = next_bid
-      return
     end
-  end 
-  
+    check_end
+  end
+  # check is bid posible 
+  def bid_posible?(bid)
+    if @@BIDS.include?(bid) == false
+      return false
+    end
+    if @game_bidded and ( bid = 'NB' or bid = 'D' or bid = 'RD' )
+      return false
+    end 
+    if @doubled == false and bid == 'RD'
+      return false
+    end
+  end
+  # next regular bid ( one up from last bid contract)
   def next_bid
    if @last_bid == 'N'
      return '2'
@@ -61,7 +79,6 @@ class Bid
    
    if @last_bid != '2' and @last_bid.slice(0,1) != "m"
      # we only add m (my) indetifer
-     puts @last_bid
      return  "m#{@last_bid}"
    end
    
@@ -70,5 +87,15 @@ class Bid
    end 
      
   end 
-     
+  # check is bidding is finish
+  def check_end
+    # after 3 pass bid it is end
+    if @bids.slice(@bids.size-2,3).count("P") == 3 
+      @end = true
+    end
+  end
+  def is_end?
+    @end
+  end
+       
 end
