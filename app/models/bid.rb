@@ -57,15 +57,27 @@ class Bid
   end
   # check is bid posible 
   def bid_posible?(bid)
+
     if @@BIDS.include?(bid) == false
       return false
     end
-    if @game_bidded and ( bid = 'NB' or bid = 'D' or bid = 'RD' )
+
+    if @@BIDS.size == 0 
+      return true    
+    end
+
+    if @game_bidded and ( bid == 'NB' or bid == 'D' or bid == 'RD' )
       return false
-    end 
+    end
+
     if @doubled == false and bid == 'RD'
       return false
     end
+    
+    if (@doubled == true or @last_bid == 'N' ) and bid =='D' 
+      return false
+    end
+    true
   end
   # next regular bid ( one up from last bid contract)
   def next_bid
@@ -87,10 +99,27 @@ class Bid
    end 
      
   end 
+
+  #all this methods is for this
+  #returning array of possible bids
+  def posible_bids
+    a = Array.new
+    @@BIDS.each do |bid|
+      if bid_posible?(bid)
+        a << bid
+      end
+    end    
+    a
+  end
+
+  
   # check is bidding is finish
   def check_end
     # after 3 pass bid it is end
-    if @bids.slice(@bids.size-2,3).count("P") == 3 
+    if @bids.size < 3
+     return 
+    end
+    if @bids.slice(@bids.size-3,3).count("P") == 3 
       @end = true
     end
   end
