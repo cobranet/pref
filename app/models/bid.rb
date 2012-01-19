@@ -12,7 +12,7 @@ class Bid
                 'sans' ]
   # bidds 
   # NB or next bid is minimal contract not bid yet
-  @@BIDS = ['P','NB','G','GB','GS','D','RD']
+  @@BIDS = ['P','NB','G','GB','GS']
   #bids description
   @@BIDS_DESC = [ 'pass',
                   'next bid',
@@ -48,33 +48,41 @@ class Bid
       @game_bidded = true
     end
     if bid == 'P' 
-      @bids << bid
-    elsif  bid == "NB" 
-      @bids << bid
+      nil
+    elsif bid == 'NB' 
       @last_bid = next_bid
+    else 
+      @last_bid = bid
     end
+    @bids << bid
     check_end
   end
-  # check is bid posible 
-  def bid_posible?(bid)
 
+
+  # check is bid posible
+  # all bidding rules are here 
+  def bid_posible?(bid)
+    # if not in bid list can't be bidded 
     if @@BIDS.include?(bid) == false
       return false
     end
-
+    # if no bids before anything can be bidded
     if @@BIDS.size == 0 
       return true    
     end
-
-    if @game_bidded and ( bid == 'NB' or bid == 'D' or bid == 'RD' )
+     
+    # if game bidded next bid is off
+    if @game_bidded and bid == "NB"
+      return false
+    end
+     
+    # if sans game bid then can't call bettl
+    if @last_bid == "GS" and bid == "GB"
       return false
     end
 
-    if @doubled == false and bid == 'RD'
-      return false
-    end
-    
-    if (@doubled == true or @last_bid == 'N' ) and bid =='D' 
+    #if sans game or betl  game bidded can't call game
+    if @last_bid == 'GS' or @last_bid == 'GB' and bid == 'G' 
       return false
     end
     true
