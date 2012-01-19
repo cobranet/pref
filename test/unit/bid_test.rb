@@ -127,6 +127,21 @@ class BidTest < ActiveSupport::TestCase
    assert_equal true, a.include?('GS')
    assert_equal true, a.include?('G')
    assert_equal 4, a.size
+   
+   # after bettl game, only bet is sans game and pass 
+   # and betl game ?
+   @b.bid("GB")
+   a = @b.posible_bids
+   #must be only GS P GB
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('GS')
+   assert_equal 3, a.size
+   # after sans game you must pass or bid sans game!
+   @b.bid("GS")
+   a = @b.posible_bids
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('P')
+   assert_equal 2, a.size
  end
   
 end
