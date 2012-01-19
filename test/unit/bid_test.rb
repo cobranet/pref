@@ -91,7 +91,6 @@ class BidTest < ActiveSupport::TestCase
 
  test "posible bids" do
    a = @b.posible_bids
-   puts a
    #must be pass,next_bid,game,bettle game, sans_game
    assert_equal true, a.include?('P')
    assert_equal true, a.include?('NB')
@@ -99,6 +98,35 @@ class BidTest < ActiveSupport::TestCase
    assert_equal true, a.include?('GS')
    assert_equal true, a.include?('GB')
    assert_equal 5, a.size 
+   # after bid od 2 ( NB) all must be same
+   @b.bid("NB")
+   a = @b.posible_bids
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('NB')
+   assert_equal true, a.include?('G')
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('GB')
+   assert_equal 5, a.size 
+   #and again
+   @b.bid("NB")
+   a = @b.posible_bids
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('NB')
+   assert_equal true, a.include?('G')
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('GB')
+   assert_equal 5, a.size 
+   # when we here we can check last bid
+   assert_equal '3', @b.last_bid    
+   # game is show stopper
+   @b.bid("G")
+   a = @b.posible_bids
+   #must be only GS GB P and another G
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('GB')
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('G')
+   assert_equal 4, a.size
  end
   
 end
