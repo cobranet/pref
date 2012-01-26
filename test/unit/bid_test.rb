@@ -54,7 +54,7 @@ class BidTest < ActiveSupport::TestCase
     assert_equal false, @first_bid_2.is_end?
     @first_bid_2.bid('P')
     @first_bid_2.bid('P')
-    assert_equal false, @first_bid_2.is_end?
+    assert_equal true, @first_bid_2.is_end?
   end 
 
  test "game bid" do
@@ -144,4 +144,20 @@ class BidTest < ActiveSupport::TestCase
    assert_equal 2, a.size
  end
   
+ test "more game bids" do
+   @b.bid("G")
+   @b.bid("G")
+   assert_equal true, @b.bid_posible?("2")
+ end  
+
+ test "bidders " do
+   assert_equal :east, @b.bidder
+   @b.bid("P")
+   assert_equal :west, @b.bidder
+   @b.bid("NB")
+   assert_equal :south,@b.bidder
+   @b.bid("P")
+   assert_equal :east, @b.bidder
+   assert_equal :west, @b.last_bidder
+ end
 end

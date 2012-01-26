@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>Class: Bid</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/bid.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-bid">#bid</a>
+    
+    <li><a href="#method-i-bid_posible-3F">#bid_posible?</a>
+    
+    <li><a href="#method-i-bidder">#bidder</a>
+    
+    <li><a href="#method-i-check_end">#check_end</a>
+    
+    <li><a href="#method-i-is_end-3F">#is_end?</a>
+    
+    <li><a href="#method-i-next_bid">#next_bid</a>
+    
+    <li><a href="#method-i-posible_bids">#posible_bids</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./Bid.html">Bid</a>
+  
+    <li><a href="./Card.html">Card</a>
+  
+    <li><a href="./Game.html">Game</a>
+  
+    <li><a href="./Hand.html">Hand</a>
+  
+    <li><a href="./Livetest.html">Livetest</a>
+  
+    <li><a href="./LivetestsController.html">LivetestsController</a>
+  
+    <li><a href="./LivetestsHelper.html">LivetestsHelper</a>
+  
+    <li><a href="./Prefgame.html">Prefgame</a>
+  
+    <li><a href="./PrefgamesController.html">PrefgamesController</a>
+  
+    <li><a href="./PrefgamesHelper.html">PrefgamesHelper</a>
+  
+    <li><a href="./Screen.html">Screen</a>
+  
+    <li><a href="./ScreenCard.html">ScreenCard</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./Waiting.html">Waiting</a>
+  
+    <li><a href="./WelcomeController.html">WelcomeController</a>
+  
+    <li><a href="./WelcomeHelper.html">WelcomeHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Bid</h1>
+
+  <div id="description" class="description">
+    
+<p><a href="Bid.html">Bid</a> in preferans game</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-bids" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">bids</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>main atributs bidding and bid</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-last_bid" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">last_bid</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>main atributs bidding and bid</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-last_bidder" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">last_bidder</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>main atributs bidding and bid</p>
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>bid is string from @@BIDS last bid is minimal contract bidded if bids are
+&gt; ‘2’ then can be bid twince … in second we add indentifier m  m3 , m4
+.… m7</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-ivar">@bidders</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@bids</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@last_bid</span> = <span class="ruby-string">'N'</span>
+  <span class="ruby-ivar">@last_bidder</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@end</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@game_bidded</span> = <span class="ruby-keyword">false</span> 
+  <span class="ruby-ivar">@more_bid_game</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-bid" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bid</span><span
+            class="method-args">(bid)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>someone is bidding</p>
+          
+
+          
+          <div class="method-source-code" id="bid-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bid</span>(<span class="ruby-identifier">bid</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">bid_posible?</span>(<span class="ruby-identifier">bid</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> 
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeError</span>, <span class="ruby-node">&quot;Invalid bid #{bid} last bid = #{@last_bid} game bided = #{@game_bidded} &quot;</span>
+  <span class="ruby-keyword">end</span>  
+  <span class="ruby-comment"># if game bidded</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">bid</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span>) <span class="ruby-operator">==</span> <span class="ruby-string">'G'</span>
+     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@game_bidded</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">'G'</span> 
+       <span class="ruby-ivar">@more_bid_game</span> = <span class="ruby-keyword">true</span>   
+     <span class="ruby-keyword">end</span> 
+     <span class="ruby-ivar">@game_bidded</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">'P'</span> 
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">'NB'</span> 
+    <span class="ruby-ivar">@last_bid</span> = <span class="ruby-identifier">next_bid</span>
+    <span class="ruby-ivar">@last_bidder</span> = <span class="ruby-identifier">bidder</span>
+  <span class="ruby-keyword">else</span> 
+    <span class="ruby-ivar">@last_bid</span> = <span class="ruby-identifier">bid</span>
+    <span class="ruby-ivar">@last_bidder</span> = <span class="ruby-identifier">bidder</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@bids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">bid</span>
+  <span class="ruby-ivar">@bidders</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">bidder</span>
+  <span class="ruby-identifier">check_end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- bid-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- bid-method -->
+
+    
+      <div id="method-i-bid_posible-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bid_posible?</span><span
+            class="method-args">(bid)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>check is bid posible all bidding rules are here</p>
+          
+
+          
+          <div class="method-source-code" id="bid_posible-3F-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bid_posible?</span>(<span class="ruby-identifier">bid</span>)
+
+  <span class="ruby-comment"># if not in bid list can't be bidded </span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@BIDS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">bid</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@more_bid_game</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># if no bids before anything can be bidded</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bids</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>    
+  <span class="ruby-keyword">end</span>
+   
+  <span class="ruby-comment"># if game bidded next bid is off</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@game_bidded</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;NB&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+   
+  <span class="ruby-comment"># if sans game bid then can't call bettl</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;GS&quot;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;GB&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment">#if sans game or betl  game bidded can't call game</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">'GS'</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@last_bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">'GB'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">'G'</span> 
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- bid_posible-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- bid_posible-3F-method -->
+
+    
+      <div id="method-i-bidder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bidder</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>who is bidder, everybody must bid ..or not ? is there is rule that if you
+pass once can’t bid later ?</p>
+          
+
+          
+          <div class="method-source-code" id="bidder-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bidder</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bidders</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-value">:east</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:west</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bidders</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-value">:west</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">:south</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-value">:east</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- bidder-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- bidder-method -->
+
+    
+      <div id="method-i-check_end" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_end</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>check is bidding is finish</p>
+          
+
+          
+          <div class="method-source-code" id="check_end-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">check_end</span>
+  <span class="ruby-comment"># after 3 pass bid it is end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bids</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>
+   <span class="ruby-keyword">return</span> 
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bids</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-ivar">@bids</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">3</span>,<span class="ruby-value">3</span>).<span class="ruby-identifier">count</span>(<span class="ruby-string">&quot;P&quot;</span>) <span class="ruby-operator">==</span> <span class="ruby-value">3</span>  <span class="ruby-keyword">and</span> <span class="ruby-ivar">@more_bid_game</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-ivar">@end</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bids</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-ivar">@bids</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">2</span>,<span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>(<span class="ruby-string">&quot;P&quot;</span>) <span class="ruby-operator">==</span> <span class="ruby-value">2</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@more_bid_game</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>  <span class="ruby-keyword">and</span> <span class="ruby-ivar">@last_bidder</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">bidder</span> 
+    <span class="ruby-ivar">@end</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- check_end-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- check_end-method -->
+
+    
+      <div id="method-i-is_end-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_end?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_end-3F-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_end?</span>
+  <span class="ruby-ivar">@end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_end-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_end-3F-method -->
+
+    
+      <div id="method-i-next_bid" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">next_bid</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>next regular bid ( one up from last bid contract)</p>
+          
+
+          
+          <div class="method-source-code" id="next_bid-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">next_bid</span>
+ <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">'N'</span>
+   <span class="ruby-keyword">return</span> <span class="ruby-string">'2'</span>
+ <span class="ruby-keyword">end</span>   
+ 
+ <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_bid</span> <span class="ruby-operator">==</span> <span class="ruby-string">'2'</span> 
+   <span class="ruby-keyword">return</span> <span class="ruby-string">'3'</span>
+ <span class="ruby-keyword">end</span>
+ 
+ <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_bid</span> <span class="ruby-operator">!=</span> <span class="ruby-string">'2'</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@last_bid</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span>) <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;m&quot;</span>
+   <span class="ruby-comment"># we only add m (my) indetifer</span>
+   <span class="ruby-keyword">return</span>  <span class="ruby-node">&quot;m#{@last_bid}&quot;</span>
+ <span class="ruby-keyword">end</span>
+ 
+ <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_bid</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span>,<span class="ruby-value">1</span>) <span class="ruby-operator">==</span> <span class="ruby-string">'m'</span> 
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">@@CONTRACTS</span>[<span class="ruby-identifier">@@CONTRACTS</span>.<span class="ruby-identifier">index</span>(<span class="ruby-ivar">@last_bid</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>))<span class="ruby-operator">+</span><span class="ruby-value">1</span>]
+ <span class="ruby-keyword">end</span> 
+   
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- next_bid-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- next_bid-method -->
+
+    
+      <div id="method-i-posible_bids" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">posible_bids</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>all this methods is for this returning array of possible bids</p>
+          
+
+          
+          <div class="method-source-code" id="posible_bids-source">
+            <pre><span class="ruby-comment"># File app/models/bid.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">posible_bids</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">@@BIDS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bid</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">bid_posible?</span>(<span class="ruby-identifier">bid</span>)
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">bid</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>    
+  <span class="ruby-identifier">a</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- posible_bids-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- posible_bids-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

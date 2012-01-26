@@ -1,10 +1,14 @@
 require 'test_helper'
 
 class BidTest < ActiveSupport::TestCase
+  
   #new bid
   def setup 
     @b = Bid.new
+    @first_bid_2 = Bid.new
+    @first_bid_2.bid('NB')
   end
+  
   test "initialize bid" do
     b = Bid.new
     assert_equal Array, b.bids.class
@@ -46,9 +50,114 @@ class BidTest < ActiveSupport::TestCase
     @b.bid("P")
     @b.bid("P")
     @b.bid("P")
-    @b.check_end
     assert_equal true, @b.is_end?
+    assert_equal false, @first_bid_2.is_end?
+    @first_bid_2.bid('P')
+    @first_bid_2.bid('P')
+    assert_equal true, @first_bid_2.is_end?
   end 
+
+ test "game bid" do
+   @b.bid("G")
+   assert_raise RuntimeError do
+     @b.bid("NB")
+    end
+ end
  
+ test "can't bid everything" do
+   assert_equal false, @b.bid_posible?('BRACA')  
+   assert_equal false, @first_bid_2.bid_posible?('BRACA')  
+ end
+ 
+ test "In any time can pass" do
+   assert_equal true, @b.bid_posible?('P')
+   assert_equal true, @first_bid_2.bid_posible?('P')
+ end
+ 
+ test "When we can make NB " do
+   assert_equal true, @b.bid_posible?("NB")
+   @b.bid("G")
+   assert_equal false, @b.bid_posible?("NB")
+ end   
+ 
+ test "When we can call a game" do
+   assert_equal true, @b.bid_posible?("G")
+   assert_equal true, @b.bid_posible?("GB")
+   assert_equal true, @b.bid_posible?("GS")
+   @b.bid("GB")
+   assert_equal false, @b.bid_posible?("G")
+   assert_equal true, @b.bid_posible?("GS")
+ end
+
+ test "posible bids" do
+   a = @b.posible_bids
+   #must be pass,next_bid,game,bettle game, sans_game
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('NB')
+   assert_equal true, a.include?('G')
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('GB')
+   assert_equal 5, a.size 
+   # after bid od 2 ( NB) all must be same
+   @b.bid("NB")
+   a = @b.posible_bids
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('NB')
+   assert_equal true, a.include?('G')
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('GB')
+   assert_equal 5, a.size 
+   #and again
+   @b.bid("NB")
+   a = @b.posible_bids
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('NB')
+   assert_equal true, a.include?('G')
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('GB')
+   assert_equal 5, a.size 
+   # when we here we can check last bid
+   assert_equal '3', @b.last_bid    
+   # game is show stopper
+   @b.bid("G")
+   a = @b.posible_bids
+   #must be only GS GB P and another G
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('GB')
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('G')
+   assert_equal 4, a.size
+   
+   # after bettl game, only bet is sans game and pass 
+   # and betl game ?
+   @b.bid("GB")
+   a = @b.posible_bids
+   #must be only GS P GB
+   assert_equal true, a.include?('P')
+   assert_equal true, a.include?('GS')
+   assert_equal 3, a.size
+   # after sans game you must pass or bid sans game!
+   @b.bid("GS")
+   a = @b.posible_bids
+   assert_equal true, a.include?('GS')
+   assert_equal true, a.include?('P')
+   assert_equal 2, a.size
+ end
   
+ test "more game bids" do
+   @b.bid("G")
+   @b.bid("G")
+   assert_equal true, @b.bid_posible?("2")
+ end  
+
+ test "Testing bidders " do
+   assert_equal :east, @b.bidder
+   @b.bid("P")
+   assert_equal :west, @b.bidder
+   @b.bid("NB")
+   assert_equal :south,@b.bidder
+   @b.bid("P")
+   assert_equal :east, @b.bidder
+   assert_equal :west, @b.last_bidder
+ end
 end

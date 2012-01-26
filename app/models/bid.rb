@@ -1,5 +1,6 @@
 # Bid in preferans game 
 class Bid
+  #becouse dealer is always south ... first on bid is :east
   # posible contracts 
   @@CONTRACTS = ['N','2','3','4','5','6','7']
   #description of contracts 
@@ -22,7 +23,7 @@ class Bid
                   'double',
                   'redouble' ]
   #main atributs bidding and bid
-  attr_reader :bids, :last_bid
+  attr_reader :bids, :last_bid, :last_bidder
   
   #
   # bid is string from @@BIDS
@@ -30,14 +31,18 @@ class Bid
   # if bids are > '2' then can be bid twince ... in second we add indentifier m 
   # m3 , m4 .... m7
   def initialize
+    @bidders = Array.new
     @bids = Array.new
     @last_bid = 'N'
+    @last_bidder = nil
     @end = false
     @game_bidded = false 
-    @doubled = false
-    @redoubled = false
+    @more_bid_game = false
+    @game_bidders = Array.new
+    @pass_bidders = Array.new
+    @game_contracts = Array.new
   end
-   
+     
   #someone is bidding
   def bid(bid)
     if bid_posible?(bid) == false 
@@ -45,16 +50,22 @@ class Bid
     end  
     # if game bidded
     if bid.slice(0,1) == 'G'
-      @game_bidded = true
+       if @game_bidded and bid == 'G' 
+         @more_bid_game = true   
+       end 
+       @game_bidded = true
     end
     if bid == 'P' 
       nil
     elsif bid == 'NB' 
       @last_bid = next_bid
+      @last_bidder = bidder
     else 
       @last_bid = bid
+      @last_bidder = bidder
     end
     @bids << bid
+    @bidders << bidder
     check_end
   end
 
@@ -62,12 +73,13 @@ class Bid
   # check is bid posible
   # all bidding rules are here 
   def bid_posible?(bid)
+
     # if not in bid list can't be bidded 
-    if @@BIDS.include?(bid) == false
+    if @@BIDS.include?(bid) == false and @more_bid_game == false
       return false
     end
     # if no bids before anything can be bidded
-    if @@BIDS.size == 0 
+    if @bids.size == 0 
       return true    
     end
      
@@ -76,7 +88,7 @@ class Bid
       return false
     end
      
-    # if sans game bid then can't call bettl
+    # xsif sans game bid then can't call bettl
     if @last_bid == "GS" and bid == "GB"
       return false
     end
@@ -87,6 +99,8 @@ class Bid
     end
     true
   end
+
+
   # next regular bid ( one up from last bid contract)
   def next_bid
    if @last_bid == 'N'
@@ -120,14 +134,58 @@ class Bid
     a
   end
 
+
+  #who is bidder, everybody must bid ..or not ?
+  #is there is rule that if you pass once can't bid later ?
+  def next_player(player)
+    
+    if player == :east
+      b = :west
+    elsif player == :west
+      b = :south
+    else
+      b = :east
+    end 
+    return b
+  end  
   
+  # this is missing from ruby .. I want index of nth element of array
+  def self.nth_of_array (arr,value,n)
+    how=0
+    arr.each_with_index do |v,i|
+      if v == value
+        how = how+1
+        if how == n 
+          return i
+        end
+      end
+    end
+   nil
+  end
+  def bidder
+    last = @bidders.last
+    if @pass_bidders.include?(last) 
+      @bids << 'P'
+      @bidders <<  next_player(last)
+      return bidder
+    end
+    next_player(last)     
+  end
+  
+  
+  
+
+
   # check is bidding is finish
   def check_end
     # after 3 pass bid it is end
     if @bids.size < 3
      return 
     end
-    if @bids.slice(@bids.size-3,3).count("P") == 3 
+    if @bids.slice(@bids.size-3,3).count("P") == 3  and @more_bid_game == false
+      @end = true
+    end
+    if @bids.slice(@bids.size-2,2).count("P") == 2 and @more_bid_game == false  and @last_bidder == bidder 
       @end = true
     end
   end
