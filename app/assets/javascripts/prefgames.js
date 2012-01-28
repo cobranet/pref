@@ -128,9 +128,9 @@ var cardT = {
                       $("#jerror").html(data.responseText); 
              });
     },
-    set_player_cards: function(data){
-        var g = $.parseJSON(data);
-        cardT.game = g;  
+    set_player_cards: function(data,channel){
+        var g = $.parseJSON(data.gm);
+        cardT.game = g;
         for (var i= 0;i<g.mycards.length;i++){
             cardT.cards[g.mycards[i].id].visible = true;
             cardT.cards[g.mycards[i].id].x = g.mycards[i].x;
@@ -153,22 +153,20 @@ var cardT = {
             alert(clickked);
             alert(cardT.game.mycards[clickked].str);
 	}
-//	alert((event.pageX -pos.left)   + " " + (event.pageY-pos.top) );
     }	
 };
-
 
 /* on load */
 
 $(function () {
     cardT.setup();
     cardT.resize_canvas();
+    PrivatePub.subscribe("/messages/new",cardT.set_player_cards);
 });
 
 /* resize canvas when resize window */
 $(window).resize( function(){
     cardT.resize_canvas();   
 });
-
 
    

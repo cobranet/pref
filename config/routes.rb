@@ -5,7 +5,7 @@ Pref::Application.routes.draw do
 
   resources :prefgames do
     member do 
-      get 'data'
+      post 'data'
     end
   end
   devise_for :users

@@ -7,6 +7,12 @@
 <%= content_tag(:div , @prefgame.id, :id => "urlid" ) %>
 <div id="jerror"></div>
 <div id="log"></div>
-<canvas id="main"></canvas>
 
+<%= form_tag "/prefgames/51/data", remote: true do |f| %>
+  <%= text_field_tag :content %>
+  <%= submit_tag "Send" %>
+<% end %>
+
+<canvas id="main"></canvas>
+<%= subscribe_to "/messages/new" %>
 

@@ -29,6 +29,9 @@ class PrefgamesController < ApplicationController
   #AJAX call this every X seconds ....
   def data 
     @prefgame = Prefgame.find_by_id(params[:id])
-    render :text => @prefgame.data.to_json
+    @gm = @prefgame.data.to_json
+    @gm = @prefgame.data 
+    PrivatePub.publish_to("/messages/new", :gm => @gm );
+    render :nothing => true
   end
 end

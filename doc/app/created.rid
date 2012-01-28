@@ -1,16 +1,16 @@
-Fri, 20 Jan 2012 19:12:45 +0100
+Sat, 28 Jan 2012 09:26:24 +0100
 doc/README_FOR_APP	Wed, 14 Dec 2011 00:21:10 +0100
 app/models/hand.rb	Tue, 10 Jan 2012 17:54:39 +0100
 app/models/card.rb	Tue, 10 Jan 2012 21:53:50 +0100
 app/models/waiting.rb	Tue, 10 Jan 2012 18:15:25 +0100
 app/models/livetest.rb	Thu, 22 Dec 2011 10:29:04 +0100
-app/models/bid.rb	Fri, 20 Jan 2012 19:07:39 +0100
+app/models/bid.rb	Sat, 21 Jan 2012 13:04:13 +0100
 app/models/screen.rb	Wed, 11 Jan 2012 02:55:23 +0100
 app/models/game.rb	Tue, 17 Jan 2012 13:14:21 +0100
 app/models/prefgame.rb	Thu, 22 Dec 2011 15:11:56 +0100
 app/models/user.rb	Thu, 08 Dec 2011 08:25:33 +0100
 app/controllers/welcome_controller.rb	Thu, 08 Dec 2011 17:37:53 +0100
-app/controllers/prefgames_controller.rb	Tue, 10 Jan 2012 16:18:10 +0100
+app/controllers/prefgames_controller.rb	Sat, 28 Jan 2012 08:49:08 +0100
 app/controllers/application_controller.rb	Sun, 04 Dec 2011 16:04:15 +0100
 app/controllers/livetests_controller.rb	Thu, 22 Dec 2011 10:28:08 +0100
 app/helpers/prefgames_helper.rb	Fri, 09 Dec 2011 21:54:04 +0100
