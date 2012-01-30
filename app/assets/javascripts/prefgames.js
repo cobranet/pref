@@ -161,7 +161,10 @@ var cardT = {
 $(function () {
     cardT.setup();
     cardT.resize_canvas();
-    PrivatePub.subscribe("/messages/new",cardT.set_player_cards);
+    var user_id=$("#user_id").html();
+    var game_id=$("#game_id").html();
+    PrivatePub.subscribe("/game/"+game_id+"/"+user_id,cardT.set_player_cards);
+    
 });
 
 /* resize canvas when resize window */

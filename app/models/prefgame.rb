@@ -1,12 +1,12 @@
-#  create_table "prefgames", :force => true do |t|
-#    t.string   "game"
-#    t.string   "status"
-#    t.integer  "east"
-#    t.integer  "south"
-#    t.integer  "west"
-#    t.datetime "created_at"
-#    t.datetime "updated_at"
-#  end
+# create_table "prefgames", :force => true do |t|
+# t.string "game"
+# t.string "status"
+# t.integer "east"
+# t.integer "south"
+# t.integer "west"
+# t.datetime "created_at"
+# t.datetime "updated_at"
+# end
 # Prefgames
 class Prefgame < ActiveRecord::Base
 
@@ -24,27 +24,49 @@ class Prefgame < ActiveRecord::Base
     p.save!
     p
   end
+   
+  # returning user ids of games
+  def players
+    @a = Array.new
+    @a << east 
+    @a << south
+    @a << west
+    @a
+  end
+   
+  # no idea what is this sheet 
   def fgame
     if @full_game == nil
       @full_game = Game.from_game_string(self.game)
     end
     @full_game
   end
+
+  #only synonm for id
   def game_id
-    @id  
+    @id
   end
 
-  def screen(seat)
+  # returning seat for user_id
+  def player_seat(user_id)
+    if east == user_id 
+      return :east
+    elsif south == user_id 
+      return :south
+    elsif west == user_id
+      return :west
+    else
+      raise RuntimeError, "User : #{user_id} not in game #{@id}"
+    end
+  end 
+
+  # returning data for user
+  def screen(user_id)
     players = Array.new
     players << east
     players << south
     players << west
-    screen = Screen.new(fgame,seat,players)
-  end
-   
-  def data 
-    sc = screen(:south)
-    sc.data
+    screen = Screen.new(fgame,player_seat(user_id),players)
   end
    
 end

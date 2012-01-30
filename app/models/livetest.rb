@@ -8,6 +8,7 @@ class Livetest
     maka.destroy
     ana.destroy
   end
+  
   # def create partners for tester
   def self.create_two_users
     maka  = User.new( :email => 'marija.petrovic@gmail.com',

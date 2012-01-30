@@ -7,6 +7,8 @@
 #    t.datetime "created_at"
 #    t.datetime "updated_at"
 #  end
+
+
 # Prefgame is database part of game ...
 class PrefgamesController < ApplicationController
 
@@ -15,6 +17,8 @@ class PrefgamesController < ApplicationController
   def show
     @prefgame = Prefgame.find_by_id(params[:id])
   end
+
+
   #try to start new preferans game
   def new
     Waiting.add(current_user.id)
@@ -26,12 +30,19 @@ class PrefgamesController < ApplicationController
       render :text => "Waiting"
     end
   end   
-  #AJAX call this every X seconds ....
+
+
+  #This triggered by user action
   def data 
     @prefgame = Prefgame.find_by_id(params[:id])
-    @gm = @prefgame.data.to_json
-    @gm = @prefgame.data 
-    PrivatePub.publish_to("/messages/new", :gm => @gm );
+    @prefgame.players.each_with_index do |x,i|    
+      gm = @prefgame.screen(@prefgame.players[i]).data
+      user = User.find_by_id(@prefgame.players[i])
+      if user == nil 
+        raise RuntimeError , "There is no user with id #{@prefgame.players[i]} in game #{@prefgame.id}"
+      end
+      PrivatePub.publish_to("/game/#{@prefgame.id}/#{user.id}", :gm => gm );
+    end    
     render :nothing => true
   end
 end
