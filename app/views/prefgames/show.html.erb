@@ -12,6 +12,7 @@
   <%= text_field_tag :content %>
   <%= submit_tag "Send" %>
 <% end %>
+
 <%= content_tag(:div, current_user.id, :id => "user_id") %>
 <canvas id="main"></canvas>
 <%= subscribe_to "/game/#{@prefgame.id}/#{current_user.id}" %>

@@ -6,4 +6,5 @@ class LivetestsController < ApplicationController
     Livetest.add_two
     redirect_to  :root
   end
+  
 end

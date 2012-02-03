@@ -5,17 +5,32 @@ function newCard() {
         canvas: 0,
 	ctx: 0,
         visible: false, 
+        id: 0,
 	x: 0,
+        str_value: "",
         y: 0,
+        newx: 0,
+        newy: 0, 
         inMove: false,
         width: 72,
         height: 96,
         image: 0,
         is_ready: 0,
+        selected: false,
+        setX: function(x){
+            card.x = x;
+	    card.newx = x;
+        },
+        setY: function(y){
+            card.y = y;
+	    card.newy =y;
+        },
         initCard: function(canvas,x,y,width,height,img_file){
             card.is_ready = false;
             card.x = x;
             card.y = y;
+            card.newx = x;
+            card.newy = y;
             card.width = width;
             card.height = height;
             card.canvas = canvas; // ? nije mi bas jasno zasto 
@@ -45,6 +60,28 @@ function newCard() {
                 card.ctx.drawImage(card.image,0,0,72,96,0,0,card.width,card.height); // drawimage  
             }
         },
+        move: function(){
+
+            if (card.inMove == false){
+		return; 
+            }
+            if (card.x == card.newx && card.y == card.newy) {
+		card.inMove = false;
+                return; 
+	    }
+            if (card.x>card.newx ){
+		card.x = card.x-2; 
+            }
+            if (card.x<card.newx){
+                card.x = card.x+2;
+	    }
+            if (card.y>card.newy ){
+		card.y = card.y-2; 
+            }
+            if (card.y < card.newy){
+                card.y = card.y + 2;
+	    }
+        }
         
     };
     return card;
@@ -62,6 +99,7 @@ var cardT = {
     ctx : 0, // context,
     game: 0, // object returned by get data 
     cards : [], // Array of card object /
+    cards_in_move: [], // Array of cards in move... 
     setup: function(){
 	cardT.canvas_el = $('#main').get(0);
         $('#main').click(cardT.click);
@@ -72,6 +110,8 @@ var cardT = {
            var new_canvas = document.createElement('canvas');
            cardT.cards[i] = newCard();
            cardT.cards[i].initCard(new_canvas,100,100,cardT.cardw,cardT.cardh,'/assets/'+ cardT.allcards[i] + '.png');
+           cardT.cards[i].id = i;
+           cardT.cards[i].str_value = cardT.allcards[i];   
 	}
         /* background */
         
@@ -98,7 +138,7 @@ var cardT = {
     },
 // this is primitive game loop
     drawFrame: function(){
-        
+        cardT.moveCards();
         cardT.ctx.clearRect(0,0,cardT.canvas_el.width,cardT.canvas_el.height);
         cardT.ctx.drawImage(cardT.background,0,0,640,400,0,0,cardT.canvas_el.width,cardT.canvas_el.height);
         if ( cardT.game == 0 ) { 
@@ -112,15 +152,31 @@ var cardT = {
             }
 	} 
     },
+     // move all cards 
+    moveCards: function(){
+	for (var i = 0; i < cardT.cards.length; i++){
+            if (cardT.cards[i].inMove == true) {
+                cardT.cards[i].move();
+	    }
+	}           
+    },
     resize_canvas: function(){
         var inner =  window.innerWidth;
-        cardT.canvas_el.width = inner*0.8;
-        cardT.cardw = 72 * cardT.canvas_el.width / 640;
-        cardT.cardh = cardT.cardw * 96/72;
-        cardT.canvas_el.height = cardT.canvas_el.width*0.5;
+        if (inner < 700) {
+           cardT.canvas_el.width = inner*0.8;
+          
+           cardT.cardw = 72 * cardT.canvas_el.width / 640;
+           cardT.cardh = cardT.cardw * 96/72;
+           cardT.canvas_el.height = cardT.canvas_el.width*400*640;
+	} else {
+	    cardT.canvas_el.width = 640;
+	    cardT.cardw = 72;
+	    cardT.cardh = 96;
+	    cardT.canvas_el.height = 400;
+        }
    
     },
-    get_table_data: function(){
+/*    get_table_data: function(){
       var id = $("#urlid").html(); 
       var jqXHR= $.getJSON( id + "/data")
 	    .success(cardT.set_player_cards )
@@ -128,13 +184,39 @@ var cardT = {
                       $("#jerror").html(data.responseText); 
              });
     },
+*/  
+    play_card: function(card_id){
+        var id = $("#urlid").html(); 
+	$.post("/prefgames/"+id+"/data",card_id);
+    },
     set_player_cards: function(data,channel){
         var g = $.parseJSON(data.gm);
         cardT.game = g;
         for (var i= 0;i<g.mycards.length;i++){
             cardT.cards[g.mycards[i].id].visible = true;
-            cardT.cards[g.mycards[i].id].x = g.mycards[i].x;
-            cardT.cards[g.mycards[i].id].y = g.mycards[i].y; 
+            cardT.cards[g.mycards[i].id].setX(g.mycards[i].x);
+            cardT.cards[g.mycards[i].id].setY( g.mycards[i].y); 
+        }
+    },
+    card_clicked: function(card_id){
+        var lcard = cardT.cards[card_id]
+        if ( lcard.inMove == true ) { return; };
+        if (lcard.selected == true ){
+            alert('Play card'+lcard.str_value);
+            cardT.play_card(lscard.str_value);
+            return;
+        }  
+        lcard.newy = lcard.y - 10;
+        lcard.inMove = true; 
+        lcard.selected = true;
+        for (var c = 0; c < cardT.game.mycards.length; c++){
+                
+            lcard = cardT.cards[cardT.game.mycards[c].id]; 
+	    if ( lcard.selected == true && cardT.game.mycards[c].id != card_id  ){
+                lcard.selected = false;
+		lcard.inMove = true;
+                lcard.newy = lcard.y + 10;
+            }
         }
     },
     click: function(event){
@@ -149,10 +231,8 @@ var cardT = {
                     clickked = i;
 	    }
 	}
-        if (clickked != -1){ 
-            alert(clickked);
-            alert(cardT.game.mycards[clickked].str);
-	}
+        if (clickked != -1){
+            cardT.card_clicked(cardT.game.mycards[clickked].id);	}
     }	
 };
 
