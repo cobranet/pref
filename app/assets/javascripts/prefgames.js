@@ -136,6 +136,13 @@ var cardT = {
             }
 	} 
     },
+// if one card is selected all others dont
+    select_card: function(id) {
+	for ( var i=0;cardT.cards.length;i++){
+            cardT.cards[id].selected = false; 
+        }
+        cardT.cards[id].selected = true;
+    },    
 // this is primitive game loop
     drawFrame: function(){
         cardT.moveCards();
@@ -176,18 +183,9 @@ var cardT = {
         }
    
     },
-/*    get_table_data: function(){
-      var id = $("#urlid").html(); 
-      var jqXHR= $.getJSON( id + "/data")
-	    .success(cardT.set_player_cards )
-            .error( function(data){ 
-                      $("#jerror").html(data.responseText); 
-             });
-    },
-*/  
     play_card: function(card_id){
-        var id = $("#urlid").html(); 
-	$.post("/prefgames/"+id+"/data",card_id);
+        var game_id=$("#game_id").html();
+	$.post("/prefgames/"+game_id+"/data",card_id);
     },
     set_player_cards: function(data,channel){
         var g = $.parseJSON(data.gm);
@@ -202,13 +200,14 @@ var cardT = {
         var lcard = cardT.cards[card_id]
         if ( lcard.inMove == true ) { return; };
         if (lcard.selected == true ){
-            alert('Play card'+lcard.str_value);
-            cardT.play_card(lscard.str_value);
+            cardT.play_card(lcard.str_value);
             return;
         }  
+//        cardT.select_card(card_id);  
         lcard.newy = lcard.y - 10;
         lcard.inMove = true; 
-        lcard.selected = true;
+        cardT.select_card(lcard.id);
+/*
         for (var c = 0; c < cardT.game.mycards.length; c++){
                 
             lcard = cardT.cards[cardT.game.mycards[c].id]; 
@@ -218,6 +217,7 @@ var cardT = {
                 lcard.newy = lcard.y + 10;
             }
         }
+*/
     },
     click: function(event){
         var pos = $('#main').position();
