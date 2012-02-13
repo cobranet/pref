@@ -219,6 +219,7 @@ var cardT = {
         }
 */
     },
+/* clicking is on card or event */
     click: function(event){
         var pos = $('#main').position();
         var x = event.pageX-pos.left;
