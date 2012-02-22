@@ -41,6 +41,7 @@ class PrefgamesController < ApplicationController
       if user == nil 
         raise RuntimeError , "There is no user with id #{@prefgame.players[i]} in game #{@prefgame.id}"
       end
+      # call private  pub to dispach 
       PrivatePub.publish_to("/game/#{@prefgame.id}/#{user.id}", :gm => gm );
     end    
     render :nothing => true

@@ -203,21 +203,9 @@ var cardT = {
             cardT.play_card(lcard.str_value);
             return;
         }  
-//        cardT.select_card(card_id);  
         lcard.newy = lcard.y - 10;
         lcard.inMove = true; 
-        cardT.select_card(lcard.id);
-/*
-        for (var c = 0; c < cardT.game.mycards.length; c++){
-                
-            lcard = cardT.cards[cardT.game.mycards[c].id]; 
-	    if ( lcard.selected == true && cardT.game.mycards[c].id != card_id  ){
-                lcard.selected = false;
-		lcard.inMove = true;
-                lcard.newy = lcard.y + 10;
-            }
-        }
-*/
+//        cardT.select_card(lcard.id);
     },
 /* clicking is on card or event */
     click: function(event){
