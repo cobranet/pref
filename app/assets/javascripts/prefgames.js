@@ -89,6 +89,8 @@ function newCard() {
 
 /* main table object */
 var cardT = {
+    playposx: 100,
+    playposy: 10,
     allcards: [ '7S', '8S', '9S', 'TS', 'JS', 'QS', 'KS', 'AS',
                '7D', '8D', '9D', 'TD', 'JD', 'QD', 'KD', 'AD',
                '7H', '8H', '9H', 'TH', 'JH', 'QH', 'KH', 'AH',
@@ -138,7 +140,7 @@ var cardT = {
     },
 // if one card is selected all others dont
     select_card: function(id) {
-	for ( var i=0;cardT.cards.length;i++){
+	for ( var i=0;i<cardT.cards.length;i++){
             cardT.cards[id].selected = false; 
         }
         cardT.cards[id].selected = true;
@@ -181,11 +183,14 @@ var cardT = {
 	    cardT.cardh = 96;
 	    cardT.canvas_el.height = 400;
         }
-   
     },
     play_card: function(card_id){
-        var game_id=$("#game_id").html();
-	$.post("/prefgames/"+game_id+"/data",card_id);
+        var lcard = cardT.cards[card_id];
+        lcard.inMove = true;
+        lcard.newx = cardT.playposx;
+        lcard.newy = cardT.playposy;
+//        var game_id=$("#game_id").html();
+//	$.post("/prefgames/"+game_id+"/data",card_id);
     },
     set_player_cards: function(data,channel){
         var g = $.parseJSON(data.gm);
@@ -200,12 +205,12 @@ var cardT = {
         var lcard = cardT.cards[card_id]
         if ( lcard.inMove == true ) { return; };
         if (lcard.selected == true ){
-            cardT.play_card(lcard.str_value);
+            cardT.play_card(card_id);
             return;
         }  
         lcard.newy = lcard.y - 10;
         lcard.inMove = true; 
-//        cardT.select_card(lcard.id);
+        cardT.select_card(lcard.id);
     },
 /* clicking is on card or event */
     click: function(event){
