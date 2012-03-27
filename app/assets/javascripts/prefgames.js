@@ -61,7 +61,7 @@ function newCard() {
             }
         },
         move: function(){
-
+            var step = 2;   
             if (card.inMove == false){
 		return; 
             }
@@ -70,16 +70,16 @@ function newCard() {
                 return; 
 	    }
             if (card.x>card.newx ){
-		card.x = card.x-2; 
+		card.x = card.x-step; 
             }
             if (card.x<card.newx){
-                card.x = card.x+2;
+                card.x = card.x+step;
 	    }
             if (card.y>card.newy ){
-		card.y = card.y-2; 
+		card.y = card.y-step; 
             }
             if (card.y < card.newy){
-                card.y = card.y + 2;
+                card.y = card.y + step;
 	    }
         }
         
